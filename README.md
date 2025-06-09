@@ -1,4 +1,4 @@
 BLEK Project
 ============
 
-My latest Flutter portfolio app
+My latest portfolio app
