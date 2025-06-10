@@ -1,4 +1,25 @@
-BLEK Project
-============
 
-My latest portfolio app
+# Blek Flutter Project
+
+A portfolio app showcasing a responsive UI and social media integration.
+
+## Features
+
+- Responsive design for mobile, web, and desktop
+- Social media links (GitHub, LinkedIn, Instagram, Gmail)
+- Custom widgets for a modern, clean UI
+
+## Setup
+
+1. Clone: `git clone https://github.com/koidioble/blek.git`
+2. Install: `flutter pub get`
+3. Run: `flutter run`
+
+## Screenshots
+
+![Home Page](flutter_01.png)
+
+## Technologies
+
+- Flutter, Dart, JavaScript, Node.js
+- Responsive design with custom widgets
