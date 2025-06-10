@@ -15,16 +15,19 @@ A portfolio app showcasing a responsive UI and social media integration.
 2. Install: `flutter pub get`
 3. Run: `flutter run`
 
+## Demo
+
+Try the web version: [Blek App](https://koidioble.github.io/blek)
+
 ## Screenshots
 
 ![Home Page](flutter_01.png)
 
 ## Technologies
 
-- Flutter, Dart, JavaScript, Node.js
+- Flutter, Dart
 - Responsive design with custom widgets
 
+## License
 
-## Demo
-
-Try the web version: [Blek App](https://koidioble.github.io/blek)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
