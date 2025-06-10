@@ -23,3 +23,8 @@ A portfolio app showcasing a responsive UI and social media integration.
 
 - Flutter, Dart, JavaScript, Node.js
 - Responsive design with custom widgets
+
+
+## Demo
+
+Try the web version: [Blek App](https://koidioble.github.io/blek)
