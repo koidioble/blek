@@ -57,10 +57,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/pics/pic.png
-    - assets/logos/gmail_logo.png
-    - assets/logos/github_logo.png
-    - assets/logos/linkedin_logo.png
-    - assets/logos/instagram_logo.png
+    - assets/logo/gmail_logo.png
+    - assets/logo/github_logo.png
+    - assets/logo/linkedin_logo.png
+    - assets/logo/instagram_logo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
