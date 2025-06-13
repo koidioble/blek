@@ -33,7 +33,14 @@ class _HomePage1State extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.all(30.0),
                     child: Center(
-                      child: Image.asset("assets/pics/pic.png", scale: 1.9),
+                      child: InkWell(
+                        hoverColor: canaryYellow.withValues(alpha: 0.69),
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: Image.asset("assets/pics/pic.png", scale: 1.9),
+                        ),
+                      ),
                     ),
                   ),
 
@@ -57,16 +64,28 @@ class _HomePage1State extends State<HomePage> {
                     padding: const EdgeInsets.all(9.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-
                       children: [
-                        Text(
-                          'FULL-STACK DEVELOPER',
-                          style: GoogleFonts.ubuntuMono(
-                            color: lime100,
-                            fontSize: 19.0,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.lime[100],
-                            decorationThickness: 3,
+                        Tooltip(
+                          message:
+                              'A full-stack developer is a programmer who can work on both the front-end (client-side) and back-end (server-side) of an application or website.',
+                          padding: EdgeInsets.all(9.0),
+                          decoration: BoxDecoration(
+                            color: black,
+                            border: Border.all(
+                              color: canaryYellow.withValues(alpha: 0.69),
+                            ),
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          textStyle: TextStyle(color: lime100, fontSize: 19.0),
+                          child: Text(
+                            'FULL-STACK DEVELOPER',
+                            style: GoogleFonts.ubuntuMono(
+                              color: lime100,
+                              fontSize: 19.0,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.lime[100],
+                              decorationThickness: 3,
+                            ),
                           ),
                         ),
                       ],
