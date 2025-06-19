@@ -1,6 +1,5 @@
-import 'package:blek/widgets/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:koidio_ble/widgets/colors.dart';
 
 class MySignature extends StatelessWidget {
   const MySignature({super.key});
@@ -10,8 +9,8 @@ class MySignature extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Text(
-        "© Koidio Y. Blé - 2024 - 2025",
-        style: GoogleFonts.ubuntu(color: lightGreen100),
+        "© Koidio Y. Blé - 2025",
+        style: TextStyle(color: lightOlive),
       ),
     );
   }

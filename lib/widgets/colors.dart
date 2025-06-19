@@ -31,3 +31,17 @@ Color lime300 = Colors.lime.shade300;
 Color rifleGreen = const Color(0xFF444c38);
 
 Color oliveDrab = const Color(0xFF6b8e23);
+
+Color deepSkyBlue = const Color(0xFF00BFFF);
+
+Color aquaMarine = const Color(0xFF7FFFD4);
+
+Color lightSeaGreen = const Color(0xFF20b2AA);
+
+Color darkCyan = const Color(0xFF008B8B);
+
+Color navy = const Color(0xFF000080);
+
+Color cornsilk = const Color(0xFFFFF8DC);
+
+Color stongAzure = const Color(0xFF2980B9);

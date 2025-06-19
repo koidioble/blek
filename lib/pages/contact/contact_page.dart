@@ -1,7 +1,7 @@
-import 'package:blek/widgets/colors.dart';
-import 'package:blek/widgets/my_signature.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:koidio_ble/widgets/colors.dart';
+import 'package:koidio_ble/widgets/my_signature.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactPage extends StatefulWidget {
@@ -69,11 +69,7 @@ class _ContactPageState extends State<ContactPage> {
         final uri = Uri(
           scheme: 'mailto',
           path: 'koidioble@gmail.com',
-          queryParameters: {
-            'cc': 'yannble@hotmail.com',
-            'subject': subject,
-            'body': body,
-          },
+          queryParameters: {'cc': '', 'subject': subject, 'body': body},
         );
 
         if (await canLaunchUrl(uri)) {

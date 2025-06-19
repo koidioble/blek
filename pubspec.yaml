@@ -1,5 +1,5 @@
-name: blek
-description: "A new Flutter project."
+name: koidio_ble
+description: "Koidio Blé - Personal portfolio and resume showcasing."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -32,13 +32,14 @@ dependencies:
   expansion_tile_group: ^2.3.0
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.4
   google_fonts: ^6.2.1
   mailer: ^6.4.1
   path_provider: ^2.1.5
   url_launcher: ^6.3.1
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 
@@ -61,26 +62,30 @@ flutter:
     - assets/logo/github_logo.png
     - assets/logo/linkedin_logo.png
     - assets/logo/instagram_logo.png
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
+    - assets/logo/siikaa_icon_logo.png
+    - assets/logo/128_siikaa.png
+    - assets/logo/portfolio_legacy_pic.png
+    - assets/logo/512_kb_logo.png
+    - assets/logo/512_white_bk.png
+    - assets/logo/300_white_bk.png
+    - assets/logo/bk_logo.png
+    - assets/logo/IMG_1859.png
+    - assets/pics/consultant1_min.png
+    - assets/pics/contact1_min.png
+    - assets/pics/consultant2_min.png
+    - assets/pics/contact2_min.png
+    - assets/pics/contact3_min.png
+    - assets/pics/about1.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo/512_white_bk.png"
+  web:
+    generate: true 
+    image_path: "assets/logo/512_white_bk.png"
+    favicon_path: "assets/logo/512_white_bk.png"
+
+
+
+  

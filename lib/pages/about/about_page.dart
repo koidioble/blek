@@ -1,7 +1,7 @@
-import 'package:blek/widgets/colors.dart';
-import 'package:blek/widgets/my_divider.dart';
-import 'package:blek/widgets/my_signature.dart';
 import 'package:flutter/material.dart';
+import 'package:koidio_ble/widgets/colors.dart';
+import 'package:koidio_ble/widgets/my_divider.dart';
+import 'package:koidio_ble/widgets/my_signature.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
@@ -1141,7 +1141,7 @@ class _AboutPageState extends State<AboutPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(9.0),
                                         child: Text(
-                                          "I am a hardworking Believer,",
+                                          "I am a believer in high-quality work.,",
                                           style: TextStyle(
                                             color: lightGreen100,
                                             fontWeight: FontWeight.w600,
@@ -1249,7 +1249,7 @@ class _AboutPageState extends State<AboutPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(9.0),
                                         child: Text(
-                                          "and a hopeful thinker.",
+                                          "and a measure accuracy thinker.",
                                           style: TextStyle(
                                             color: lightGreen100,
                                             fontWeight: FontWeight.w600,

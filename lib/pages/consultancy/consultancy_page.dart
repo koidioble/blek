@@ -1,8 +1,8 @@
-import 'package:blek/widgets/colors.dart';
-import 'package:blek/widgets/my_divider.dart';
-import 'package:blek/widgets/my_signature.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:koidio_ble/widgets/colors.dart';
+import 'package:koidio_ble/widgets/my_divider.dart';
+import 'package:koidio_ble/widgets/my_signature.dart';
 
 class ConsultancyPage extends StatefulWidget {
   const ConsultancyPage({super.key});
