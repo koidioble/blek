@@ -45,3 +45,5 @@ Color navy = const Color(0xFF000080);
 Color cornsilk = const Color(0xFFFFF8DC);
 
 Color stongAzure = const Color(0xFF2980B9);
+
+Color lightCoral = const Color(0xFFde4672);

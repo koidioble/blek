@@ -76,6 +76,7 @@ flutter:
     - assets/pics/contact2_min.png
     - assets/pics/contact3_min.png
     - assets/pics/about1.png
+    - assets/logo/bled_logo512.png
 
 flutter_launcher_icons:
   android: true
