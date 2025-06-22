@@ -36,6 +36,12 @@ Color deepSkyBlue = const Color(0xFF00BFFF);
 
 Color aquaMarine = const Color(0xFF7FFFD4);
 
+Color aqua = const Color(0xFF00FFF0);
+
+Color turquoise = const Color(0xFF40E0D0);
+
+Color seafoamGreen = const Color(0xFF93E9BE);
+
 Color lightSeaGreen = const Color(0xFF20b2AA);
 
 Color darkCyan = const Color(0xFF008B8B);

@@ -119,28 +119,28 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkOlive,
+      backgroundColor: white,
       appBar: AppBar(
-        backgroundColor: darkOlive,
+        backgroundColor: white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: green100),
+          icon: Icon(Icons.arrow_back, color: lightOlive),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("Send Me a Message", style: TextStyle(color: green100)),
+        title: Text("Send Me a Message", style: TextStyle(color: lightOlive)),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             InkWell(
-              hoverColor: canaryYellow,
+              hoverColor: lightOlive,
               onTap: () {},
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(3.0)),
                 ),
                 elevation: 9.0,
-                color: darkOlive,
+                color: white,
                 child: Container(
                   height: 699.0,
                   decoration: BoxDecoration(
@@ -149,175 +149,247 @@ class _ContactPageState extends State<ContactPage> {
                   child: Form(
                     key: _formKey,
                     child: Padding(
-                      padding: const EdgeInsets.all(90.0),
+                      padding: const EdgeInsets.all(60.0),
                       child: Column(
                         children: [
                           SizedBox(height: 30.0),
                           Row(
                             children: [
                               Expanded(
-                                child: TextFormField(
-                                  controller: _firstNameController,
-                                  style: TextStyle(color: lightGreen100),
-                                  decoration: InputDecoration(
-                                    labelText: 'First Name',
-                                    labelStyle: TextStyle(color: lightGreen100),
-                                    filled: true,
-                                    fillColor: black,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9.0),
-                                      borderSide: BorderSide(
-                                        color: lightGreen100,
+                                child: InkWell(
+                                  hoverColor: lightSeaGreen,
+                                  focusColor: oliveDrab,
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: TextFormField(
+                                      controller: _firstNameController,
+                                      style: TextStyle(color: lightGreen100),
+                                      decoration: InputDecoration(
+                                        labelText: 'First Name',
+                                        labelStyle: TextStyle(
+                                          color: lightGreen100,
+                                        ),
+                                        filled: true,
+                                        fillColor: midOlive,
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            9.0,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: lightGreen100,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            9.0,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: lightGreen100,
+                                          ),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            9.0,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: lightOlive,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9.0),
-                                      borderSide: BorderSide(
-                                        color: lightGreen100,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9.0),
-                                      borderSide: BorderSide(color: lightOlive),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your first name';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your first name';
-                                    }
-                                    return null;
-                                  },
                                 ),
                               ),
                               const SizedBox(width: 9.0),
                               Expanded(
-                                child: TextFormField(
-                                  controller: _lastNameController,
-                                  style: TextStyle(color: lightGreen100),
-                                  decoration: InputDecoration(
-                                    labelText: 'Last Name',
-                                    labelStyle: TextStyle(color: lightGreen100),
-                                    filled: true,
-                                    fillColor: black,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9.0),
-                                      borderSide: BorderSide(
-                                        color: lightGreen100,
+                                child: InkWell(
+                                  hoverColor: lightSeaGreen,
+                                  focusColor: oliveDrab,
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: TextFormField(
+                                      controller: _lastNameController,
+                                      style: TextStyle(color: lightGreen100),
+                                      decoration: InputDecoration(
+                                        labelText: 'Last Name',
+                                        labelStyle: TextStyle(
+                                          color: lightGreen100,
+                                        ),
+                                        filled: true,
+                                        fillColor: midOlive,
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            9.0,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: lightGreen100,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            9.0,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: lightGreen100,
+                                          ),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            9.0,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: lightOlive,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9.0),
-                                      borderSide: BorderSide(
-                                        color: lightGreen100,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9.0),
-                                      borderSide: BorderSide(color: lightOlive),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your last name';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your last name';
-                                    }
-                                    return null;
-                                  },
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 16.0),
-                          TextFormField(
-                            controller: _emailController,
-                            style: TextStyle(color: lightGreen100),
-                            decoration: InputDecoration(
-                              labelText: 'Email*',
-                              labelStyle: TextStyle(color: lightGreen100),
-                              filled: true,
-                              fillColor: black,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightGreen100),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightGreen100),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightOlive),
+                          InkWell(
+                            hoverColor: lightSeaGreen,
+                            focusColor: oliveDrab,
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: TextFormField(
+                                controller: _emailController,
+                                style: TextStyle(color: lightGreen100),
+                                decoration: InputDecoration(
+                                  labelText: 'Email*',
+                                  labelStyle: TextStyle(color: lightGreen100),
+                                  filled: true,
+                                  fillColor: midOlive,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(
+                                      color: lightGreen100,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(
+                                      color: lightGreen100,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(color: lightOlive),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your email';
+                                  }
+                                  if (!RegExp(
+                                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                                  ).hasMatch(value)) {
+                                    return 'Please enter a valid email';
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.emailAddress,
                               ),
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              if (!RegExp(
-                                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                              ).hasMatch(value)) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.emailAddress,
                           ),
                           const SizedBox(height: 16.0),
-                          TextFormField(
-                            controller: _phoneController,
-                            style: TextStyle(color: lightGreen100),
-                            decoration: InputDecoration(
-                              labelText: 'Phone (optional)',
-                              labelStyle: TextStyle(color: lightGreen100),
-                              filled: true,
-                              fillColor: black,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightGreen100),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightGreen100),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightOlive),
+                          InkWell(
+                            hoverColor: lightSeaGreen,
+                            focusColor: oliveDrab,
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: TextFormField(
+                                controller: _phoneController,
+                                style: TextStyle(color: lightGreen100),
+                                decoration: InputDecoration(
+                                  labelText: 'Phone (optional)',
+                                  labelStyle: TextStyle(color: lightGreen100),
+                                  filled: true,
+                                  fillColor: midOlive,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(
+                                      color: lightGreen100,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(
+                                      color: lightGreen100,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(color: lightOlive),
+                                  ),
+                                ),
+                                keyboardType: TextInputType.phone,
                               ),
                             ),
-                            keyboardType: TextInputType.phone,
                           ),
                           const SizedBox(height: 16.0),
-                          TextFormField(
-                            controller: _messageController,
-                            style: TextStyle(color: lightGreen100),
-                            decoration: InputDecoration(
-                              labelText: 'Message*',
-                              labelStyle: TextStyle(color: lightGreen100),
-                              filled: true,
-                              fillColor: black,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightGreen100),
+                          InkWell(
+                            hoverColor: lightSeaGreen,
+                            focusColor: oliveDrab,
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: TextFormField(
+                                controller: _messageController,
+                                style: TextStyle(color: lightGreen100),
+                                decoration: InputDecoration(
+                                  labelText: 'Message*',
+                                  labelStyle: TextStyle(color: lightGreen100),
+                                  filled: true,
+                                  fillColor: midOlive,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(
+                                      color: lightGreen100,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(
+                                      color: lightGreen100,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(color: lightOlive),
+                                  ),
+                                  alignLabelWithHint: true,
+                                ),
+                                maxLines: 5,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a message';
+                                  }
+                                  if (value.length < 10.0) {
+                                    return 'Message should be at least 10 characters';
+                                  }
+                                  return null;
+                                },
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightGreen100),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9.0),
-                                borderSide: BorderSide(color: lightOlive),
-                              ),
-                              alignLabelWithHint: true,
                             ),
-                            maxLines: 5,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a message';
-                              }
-                              if (value.length < 10.0) {
-                                return 'Message should be at least 10 characters';
-                              }
-                              return null;
-                            },
                           ),
                           const SizedBox(height: 23.0),
                           ElevatedButton(

@@ -17,36 +17,36 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: darkOlive,
+        backgroundColor: white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: green100),
+          icon: Icon(Icons.arrow_back, color: lightOlive),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Column(
-          children: [Text("Who Am I.", style: TextStyle(color: green100))],
+          children: [Text("Who Am I.", style: TextStyle(color: lightOlive))],
         ),
         iconTheme: IconThemeData(
           color: darkOlive,
         ), // Changed to match icon color
         centerTitle: true,
       ),
-      backgroundColor: darkOlive,
+      backgroundColor: white,
 
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             InkWell(
-              hoverColor: canaryYellow,
+              hoverColor: lightOlive,
               onTap: () {},
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(3.0)),
                 ),
                 elevation: 9.0,
-                color: darkOlive,
+                color: white,
                 child: Container(
                   height: 699.0,
                   decoration: BoxDecoration(
@@ -70,7 +70,7 @@ class _AboutPageState extends State<AboutPage> {
                                 // PADDING 1 / 3
                                 ConstrainedBox(
                                   constraints: const BoxConstraints(
-                                    maxWidth: 300,
+                                    maxWidth: 300.0,
                                   ),
                                   child: InkWell(
                                     hoverColor: lightGreen100,
@@ -92,7 +92,7 @@ class _AboutPageState extends State<AboutPage> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
-                                            colors: [black, rifleGreen],
+                                            colors: [darkOlive, rifleGreen],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                           ),
@@ -151,7 +151,7 @@ class _AboutPageState extends State<AboutPage> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
-                                            colors: [black, rifleGreen],
+                                            colors: [darkOlive, rifleGreen],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                           ),
@@ -206,7 +206,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -265,7 +265,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -319,7 +319,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -373,7 +373,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -430,7 +430,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -484,7 +484,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -538,7 +538,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -577,7 +577,7 @@ class _AboutPageState extends State<AboutPage> {
 
                                 Text(
                                   "1 / 3",
-                                  style: TextStyle(color: lightGreen300),
+                                  style: TextStyle(color: lightOlive),
                                 ),
                                 const MyDivider(),
                               ],
@@ -609,7 +609,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -663,7 +663,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -717,7 +717,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -776,7 +776,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -798,7 +798,7 @@ class _AboutPageState extends State<AboutPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(9.0),
                                         child: Text(
-                                          "Anthropology, History, Geography, Culture,",
+                                          "Anthropology, History, Geography, Politics, Culture,",
                                           style: TextStyle(
                                             color: lightGreen100,
                                             fontWeight: FontWeight.w600,
@@ -830,7 +830,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -884,7 +884,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -941,7 +941,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -995,7 +995,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1049,7 +1049,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1087,7 +1087,7 @@ class _AboutPageState extends State<AboutPage> {
                                 const SizedBox(height: 60.0),
                                 Text(
                                   "2 / 3",
-                                  style: TextStyle(color: lightGreen300),
+                                  style: TextStyle(color: lightOlive),
                                 ),
                                 const MyDivider(),
                               ],
@@ -1119,7 +1119,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1173,7 +1173,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1227,7 +1227,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1283,7 +1283,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1337,7 +1337,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1391,7 +1391,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1446,7 +1446,7 @@ class _AboutPageState extends State<AboutPage> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [black, rifleGreen],
+                                          colors: [darkOlive, rifleGreen],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         ),
@@ -1484,7 +1484,7 @@ class _AboutPageState extends State<AboutPage> {
                                 const SizedBox(height: 60.0),
                                 Text(
                                   "3 / 3",
-                                  style: TextStyle(color: lightGreen300),
+                                  style: TextStyle(color: lightOlive),
                                 ),
                                 const MyDivider(),
                               ],

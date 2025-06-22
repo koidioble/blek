@@ -11,6 +11,7 @@
         "expansion_tile_group",
         "flutter",
         "flutter_launcher_icons",
+        "font_awesome_flutter",
         "google_fonts",
         "mailer",
         "path_provider",
@@ -102,6 +103,13 @@
         "flutter",
         "http",
         "path_provider"
+      ]
+    },
+    {
+      "name": "font_awesome_flutter",
+      "version": "10.8.0",
+      "dependencies": [
+        "flutter"
       ]
     },
     {

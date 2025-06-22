@@ -24,35 +24,35 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: darkOlive,
+        backgroundColor: white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: green100),
+          icon: Icon(Icons.arrow_back, color: lightOlive),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text("What I Do.", style: TextStyle(color: green100)),
+        title: Text("What I Do.", style: TextStyle(color: lightOlive)),
         centerTitle: true,
       ),
-      backgroundColor: darkOlive,
+      backgroundColor: white,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             InkWell(
-              hoverColor: canaryYellow,
+              hoverColor: lightOlive,
               onTap: () {},
               child: Card(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(3.0)),
                 ),
                 elevation: 9.0,
-                color: darkOlive,
+                color: white,
                 child: Container(
                   height: 699.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(9.0),
-                    color: darkOlive,
+                    color: white,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -82,7 +82,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                               ),
                                       icon: Icon(
                                         Icons.keyboard_arrow_left_outlined,
-                                        color: lightGreen100,
+                                        color: lightOlive,
                                       ),
                                     ),
                                     IconButton(
@@ -95,7 +95,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                           ),
                                       icon: Icon(
                                         Icons.keyboard_arrow_right_outlined,
-                                        color: lightGreen100,
+                                        color: lightOlive,
                                       ),
                                     ),
                                   ],
@@ -106,10 +106,10 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                   child: Text(
                                     'Web Development',
                                     style: TextStyle(
-                                      color: lightGreen100,
+                                      color: lightOlive,
                                       fontSize: 19.0,
                                       decoration: TextDecoration.underline,
-                                      decorationColor: lightGreen100,
+                                      decorationColor: lightOlive,
                                     ),
                                   ),
                                 ),
@@ -133,9 +133,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: lightGreen300,
-                                          border: Border.all(
-                                            color: lightGreen300,
-                                          ),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -175,8 +173,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: InkWell(
-                                        hoverColor: Colors.lightGreen[100],
-                                        splashColor: Colors.lightGreen[100],
+                                        hoverColor: lightGreen300,
                                         onTap: () {},
                                         child: Column(
                                           children: [
@@ -205,9 +202,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     borderOnForeground: true,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: lightGreen300,
-                                        ),
+                                        border: Border.all(color: darkOlive),
                                         borderRadius: BorderRadius.circular(3),
                                       ),
                                       child: Padding(
@@ -238,8 +233,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: InkWell(
-                                        hoverColor: Colors.lightGreen[100],
-                                        splashColor: Colors.lightGreen[300],
+                                        hoverColor: lightGreen300,
                                         onTap: () {},
                                         child: Text(
                                           "Ensuring it evolves with needs.",
@@ -262,9 +256,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     borderOnForeground: true,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: lightGreen300,
-                                        ),
+                                        border: Border.all(color: darkOlive),
                                         borderRadius: BorderRadius.circular(3),
                                       ),
                                       child: Padding(
@@ -292,8 +284,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: InkWell(
-                                        hoverColor: Colors.lightGreen[100],
-
+                                        hoverColor: lightGreen300,
                                         splashColor: lightGreen300,
                                         onTap: () {},
                                         child: Text(
@@ -317,9 +308,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     borderOnForeground: true,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: lightGreen300,
-                                        ),
+                                        border: Border.all(color: darkOlive),
                                         borderRadius: BorderRadius.circular(3),
                                       ),
                                       child: Padding(
@@ -342,8 +331,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(9.0),
                                     child: InkWell(
-                                      hoverColor: lightGreen100,
-                                      splashColor: lightGreen300,
+                                      hoverColor: lightGreen300,
                                       onTap: () {},
                                       child: Text(
                                         "Keeping sites functional and up-to-date.",
@@ -352,14 +340,15 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 90),
+                                const SizedBox(height: 90.0),
+
+                                const MyDivider(),
                                 Text(
                                   "1 / 3",
                                   style: GoogleFonts.ubuntuMono(
-                                    color: lightGreen300,
+                                    color: lightOlive,
                                   ),
                                 ),
-                                const MyDivider(),
                               ],
                             ),
                           ),
@@ -382,7 +371,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                                 ),
                                         icon: Icon(
                                           Icons.keyboard_arrow_left_outlined,
-                                          color: lightGreen100,
+                                          color: lightOlive,
                                         ),
                                       ),
                                       IconButton(
@@ -395,7 +384,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                             ),
                                         icon: Icon(
                                           Icons.keyboard_arrow_right_outlined,
-                                          color: lightGreen100,
+                                          color: lightOlive,
                                         ),
                                       ),
                                     ],
@@ -406,10 +395,10 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Text(
                                       'Mobile Development',
                                       style: TextStyle(
-                                        color: lightGreen100,
+                                        color: lightOlive,
                                         fontSize: 19.0,
                                         decoration: TextDecoration.underline,
-                                        decorationColor: lightGreen100,
+                                        decorationColor: lightOlive,
                                       ),
                                     ),
                                   ),
@@ -426,9 +415,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: lightGreen100,
-                                          border: Border.all(
-                                            color: transparentColor,
-                                          ),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -479,9 +466,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       color: lightGreen100,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: transparentColor,
-                                          ),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -532,9 +517,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       color: lightGreen100,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: transparentColor,
-                                          ),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -586,9 +569,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       color: lightGreen100,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: lightGreen100,
-                                          ),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -632,7 +613,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                   Text(
                                     "2 / 3",
                                     style: GoogleFonts.ubuntuMono(
-                                      color: lightGreen300,
+                                      color: lightOlive,
                                     ),
                                   ),
                                 ],
@@ -658,7 +639,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                                 ),
                                         icon: Icon(
                                           Icons.keyboard_arrow_left_outlined,
-                                          color: lightGreen100,
+                                          color: lightOlive,
                                         ),
                                       ),
                                       IconButton(
@@ -671,7 +652,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                             ),
                                         icon: Icon(
                                           Icons.keyboard_arrow_right_outlined,
-                                          color: lightGreen100,
+                                          color: lightOlive,
                                         ),
                                       ),
                                     ],
@@ -682,10 +663,10 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Text(
                                       'Software Development',
                                       style: TextStyle(
-                                        color: lightGreen100,
+                                        color: lightOlive,
                                         fontSize: 19.0,
                                         decoration: TextDecoration.underline,
-                                        decorationColor: lightGreen100,
+                                        decorationColor: lightOlive,
                                       ),
                                     ),
                                   ),
@@ -702,7 +683,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       color: green100,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: green100),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -754,7 +735,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       color: green100,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: green100),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -782,7 +763,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: InkWell(
-                                        hoverColor: lightGreen100,
+                                        hoverColor: green100,
                                         splashColor: Colors.lightGreen[300],
                                         onTap: () {},
                                         child: Text(
@@ -806,7 +787,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                       color: green100,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: green100),
+                                          border: Border.all(color: darkOlive),
                                           borderRadius: BorderRadius.circular(
                                             3,
                                           ),
@@ -834,7 +815,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: InkWell(
-                                        hoverColor: lightGreen100,
+                                        hoverColor: green100,
                                         splashColor: Colors.lightGreen[300],
                                         onTap: () {},
                                         child: Text(
@@ -885,7 +866,7 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: InkWell(
-                                        hoverColor: lightGreen100,
+                                        hoverColor: green100,
                                         splashColor: Colors.lightGreen[300],
                                         onTap: () {},
                                         child: Text(
@@ -897,13 +878,13 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                     ),
                                   ),
                                   const SizedBox(height: 90),
+                                  const MyDivider(),
                                   Text(
                                     "3 / 3",
                                     style: GoogleFonts.ubuntuMono(
-                                      color: lightGreen300,
+                                      color: lightOlive,
                                     ),
                                   ),
-                                  const MyDivider(),
                                 ],
                               ),
                             ),
