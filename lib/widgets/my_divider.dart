@@ -8,7 +8,12 @@ class MyDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Divider(color: lightOlive),
+      child: Divider(
+        
+        color: lime100.withValues(alpha: 0.3),
+        thickness: 1.5,
+        height: 30,
+      ),
     );
   }
 }

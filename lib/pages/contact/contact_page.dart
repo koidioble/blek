@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:koidio_ble/widgets/colors.dart';
+import 'package:koidio_ble/widgets/my_connect_with_me.dart';
+import 'package:koidio_ble/widgets/my_divider.dart';
 import 'package:koidio_ble/widgets/my_signature.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,6 +20,7 @@ class _ContactPageState extends State<ContactPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _messageController = TextEditingController();
+  bool _isContactHovered = false;
 
   @override
   void dispose() {
@@ -118,300 +121,505 @@ class _ContactPageState extends State<ContactPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: white,
-      appBar: AppBar(
-        backgroundColor: white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: lightOlive),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text("Send Me a Message", style: TextStyle(color: lightOlive)),
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            InkWell(
-              hoverColor: lightOlive,
-              onTap: () {},
-              child: Card(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(3.0)),
-                ),
-                elevation: 9.0,
-                color: white,
-                child: Container(
-                  height: 699.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(9.0),
+    return MouseRegion(
+      cursor: SystemMouseCursors.grab,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: darkOlive,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: seafoamGreen),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: InkWell(
+            hoverColor: midOlive.withValues(alpha: 0.39),
+            onTap: () {},
+            child: MouseRegion(
+              onEnter: (event) => setState(() => _isContactHovered = true),
+              onExit: (event) => setState(() => _isContactHovered = false),
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Text(
+                  "Contact",
+                  style: TextStyle(
+                    color: _isContactHovered ? oliveDrab : white,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 3.0,
+                    fontSize: 13.0,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 0.9,
+                        color: cornsilk.withValues(alpha: 0.6),
+                        offset: const Offset(0.3, 0.3),
+                      ),
+                    ],
                   ),
-                  child: Form(
-                    key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.all(60.0),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 30.0),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: InkWell(
-                                  hoverColor: lightSeaGreen,
-                                  focusColor: oliveDrab,
-                                  onTap: () {},
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(6.0),
-                                    child: TextFormField(
-                                      controller: _firstNameController,
-                                      style: TextStyle(color: lightGreen100),
-                                      decoration: InputDecoration(
-                                        labelText: 'First Name',
-                                        labelStyle: TextStyle(
-                                          color: lightGreen100,
-                                        ),
-                                        filled: true,
-                                        fillColor: midOlive,
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            9.0,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: lightGreen100,
-                                          ),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            9.0,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: lightGreen100,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            9.0,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: lightOlive,
-                                          ),
+                ),
+              ),
+            ),
+          ),
+          centerTitle: true,
+        ),
+        backgroundColor: darkCyan.withValues(alpha: 0.69),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              InkWell(
+                hoverColor: darkOlive,
+                highlightColor: darkCyan,
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.all(0.3),
+                  child: Card(
+                    color: lightOlive,
+                    elevation: 9.0,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(3.0)),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [darkOlive, lightOlive],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(9.0),
+                          child: Card(
+                            color: lightOlive,
+                            elevation: 9.0,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(3.0),
+                              ),
+                            ),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                maxWidth: MediaQuery.sizeOf(context).width,
+                                minHeight: MediaQuery.of(context).size.height,
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [darkOlive, lightOlive],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                                border: Border.all(color: lightOlive),
+                                borderRadius: BorderRadius.circular(9.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox(height: 16.0),
+                                  Form(
+                                    key: _formKey,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(60.0),
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.vertical,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(height: 30.0),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: InkWell(
+                                                    hoverColor: lightSeaGreen,
+                                                    focusColor: oliveDrab,
+                                                    onTap: () {},
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                            6.0,
+                                                          ),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _firstNameController,
+                                                        style: TextStyle(
+                                                          color: lightGreen100,
+                                                        ),
+                                                        decoration: InputDecoration(
+                                                          labelText:
+                                                              'First Name',
+                                                          labelStyle: TextStyle(
+                                                            color:
+                                                                lightGreen100,
+                                                          ),
+                                                          filled: true,
+                                                          fillColor: midOlive,
+                                                          border: OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  9.0,
+                                                                ),
+                                                            borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreen100,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      9.0,
+                                                                    ),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                      color:
+                                                                          lightGreen100,
+                                                                    ),
+                                                              ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      9.0,
+                                                                    ),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                      color:
+                                                                          lightOlive,
+                                                                    ),
+                                                              ),
+                                                        ),
+                                                        validator: (value) {
+                                                          if (value == null ||
+                                                              value.isEmpty) {
+                                                            return 'Please enter your first name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 9.0),
+                                                Expanded(
+                                                  child: InkWell(
+                                                    hoverColor: lightSeaGreen,
+                                                    focusColor: oliveDrab,
+                                                    onTap: () {},
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                            6.0,
+                                                          ),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _lastNameController,
+                                                        style: TextStyle(
+                                                          color: lightGreen100,
+                                                        ),
+                                                        decoration: InputDecoration(
+                                                          labelText:
+                                                              'Last Name',
+                                                          labelStyle: TextStyle(
+                                                            color:
+                                                                lightGreen100,
+                                                          ),
+                                                          filled: true,
+                                                          fillColor: midOlive,
+                                                          border: OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  9.0,
+                                                                ),
+                                                            borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreen100,
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      9.0,
+                                                                    ),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                      color:
+                                                                          lightGreen100,
+                                                                    ),
+                                                              ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      9.0,
+                                                                    ),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                      color:
+                                                                          lightOlive,
+                                                                    ),
+                                                              ),
+                                                        ),
+                                                        validator: (value) {
+                                                          if (value == null ||
+                                                              value.isEmpty) {
+                                                            return 'Please enter your last name';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 16.0),
+                                            InkWell(
+                                              hoverColor: lightSeaGreen,
+                                              focusColor: oliveDrab,
+                                              onTap: () {},
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  6.0,
+                                                ),
+                                                child: TextFormField(
+                                                  controller: _emailController,
+                                                  style: TextStyle(
+                                                    color: lightGreen100,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Email*',
+                                                    labelStyle: TextStyle(
+                                                      color: lightGreen100,
+                                                    ),
+                                                    filled: true,
+                                                    fillColor: midOlive,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            9.0,
+                                                          ),
+                                                      borderSide: BorderSide(
+                                                        color: lightGreen100,
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                9.0,
+                                                              ),
+                                                          borderSide: BorderSide(
+                                                            color:
+                                                                lightGreen100,
+                                                          ),
+                                                        ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                9.0,
+                                                              ),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                color:
+                                                                    lightOlive,
+                                                              ),
+                                                        ),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter your email';
+                                                    }
+                                                    if (!RegExp(
+                                                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                                                    ).hasMatch(value)) {
+                                                      return 'Please enter a valid email';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType
+                                                          .emailAddress,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 16.0),
+                                            InkWell(
+                                              hoverColor: lightSeaGreen,
+                                              focusColor: oliveDrab,
+                                              onTap: () {},
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  6.0,
+                                                ),
+                                                child: TextFormField(
+                                                  controller: _phoneController,
+                                                  style: TextStyle(
+                                                    color: lightGreen100,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    labelText:
+                                                        'Phone (optional)',
+                                                    labelStyle: TextStyle(
+                                                      color: lightGreen100,
+                                                    ),
+                                                    filled: true,
+                                                    fillColor: midOlive,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            9.0,
+                                                          ),
+                                                      borderSide: BorderSide(
+                                                        color: lightGreen100,
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                9.0,
+                                                              ),
+                                                          borderSide: BorderSide(
+                                                            color:
+                                                                lightGreen100,
+                                                          ),
+                                                        ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                9.0,
+                                                              ),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                color:
+                                                                    lightOlive,
+                                                              ),
+                                                        ),
+                                                  ),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 16.0),
+                                            InkWell(
+                                              hoverColor: lightSeaGreen,
+                                              focusColor: oliveDrab,
+                                              onTap: () {},
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  6.0,
+                                                ),
+                                                child: TextFormField(
+                                                  controller:
+                                                      _messageController,
+                                                  style: TextStyle(
+                                                    color: lightGreen100,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Message*',
+                                                    labelStyle: TextStyle(
+                                                      color: lightGreen100,
+                                                    ),
+                                                    filled: true,
+                                                    fillColor: midOlive,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            9.0,
+                                                          ),
+                                                      borderSide: BorderSide(
+                                                        color: lightGreen100,
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                9.0,
+                                                              ),
+                                                          borderSide: BorderSide(
+                                                            color:
+                                                                lightGreen100,
+                                                          ),
+                                                        ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                9.0,
+                                                              ),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                color:
+                                                                    lightOlive,
+                                                              ),
+                                                        ),
+                                                    alignLabelWithHint: true,
+                                                  ),
+                                                  maxLines: 5,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter a message';
+                                                    }
+                                                    if (value.length < 10.0) {
+                                                      return 'Message should be at least 10 characters';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 23.0),
+                                            ElevatedButton(
+                                              onPressed: _sendEmail,
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: oliveDrab,
+                                                minimumSize: const Size(
+                                                  double.infinity,
+                                                  60.0,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                'Send Message',
+                                                style: TextStyle(
+                                                  color: white,
+                                                  fontSize: 19.0,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(
+                                                9.0,
+                                              ),
+                                              child: ConnectWithMe(),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your first name';
-                                        }
-                                        return null;
-                                      },
                                     ),
                                   ),
-                                ),
-                              ),
-                              const SizedBox(width: 9.0),
-                              Expanded(
-                                child: InkWell(
-                                  hoverColor: lightSeaGreen,
-                                  focusColor: oliveDrab,
-                                  onTap: () {},
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(6.0),
-                                    child: TextFormField(
-                                      controller: _lastNameController,
-                                      style: TextStyle(color: lightGreen100),
-                                      decoration: InputDecoration(
-                                        labelText: 'Last Name',
-                                        labelStyle: TextStyle(
-                                          color: lightGreen100,
-                                        ),
-                                        filled: true,
-                                        fillColor: midOlive,
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            9.0,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: lightGreen100,
-                                          ),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            9.0,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: lightGreen100,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            9.0,
-                                          ),
-                                          borderSide: BorderSide(
-                                            color: lightOlive,
-                                          ),
-                                        ),
-                                      ),
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your last name';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16.0),
-                          InkWell(
-                            hoverColor: lightSeaGreen,
-                            focusColor: oliveDrab,
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: TextFormField(
-                                controller: _emailController,
-                                style: TextStyle(color: lightGreen100),
-                                decoration: InputDecoration(
-                                  labelText: 'Email*',
-                                  labelStyle: TextStyle(color: lightGreen100),
-                                  filled: true,
-                                  fillColor: midOlive,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(
-                                      color: lightGreen100,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(
-                                      color: lightGreen100,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(color: lightOlive),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your email';
-                                  }
-                                  if (!RegExp(
-                                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                                  ).hasMatch(value)) {
-                                    return 'Please enter a valid email';
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.emailAddress,
+
+                                  const SizedBox(height: 33.0),
+                                  const MyDivider(),
+                                  const SizedBox(height: 16.0),
+                                  const MySignature(),
+                                  const SizedBox(height: 16.0),
+                                ],
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16.0),
-                          InkWell(
-                            hoverColor: lightSeaGreen,
-                            focusColor: oliveDrab,
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: TextFormField(
-                                controller: _phoneController,
-                                style: TextStyle(color: lightGreen100),
-                                decoration: InputDecoration(
-                                  labelText: 'Phone (optional)',
-                                  labelStyle: TextStyle(color: lightGreen100),
-                                  filled: true,
-                                  fillColor: midOlive,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(
-                                      color: lightGreen100,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(
-                                      color: lightGreen100,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(color: lightOlive),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.phone,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 16.0),
-                          InkWell(
-                            hoverColor: lightSeaGreen,
-                            focusColor: oliveDrab,
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: TextFormField(
-                                controller: _messageController,
-                                style: TextStyle(color: lightGreen100),
-                                decoration: InputDecoration(
-                                  labelText: 'Message*',
-                                  labelStyle: TextStyle(color: lightGreen100),
-                                  filled: true,
-                                  fillColor: midOlive,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(
-                                      color: lightGreen100,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(
-                                      color: lightGreen100,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9.0),
-                                    borderSide: BorderSide(color: lightOlive),
-                                  ),
-                                  alignLabelWithHint: true,
-                                ),
-                                maxLines: 5,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a message';
-                                  }
-                                  if (value.length < 10.0) {
-                                    return 'Message should be at least 10 characters';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 23.0),
-                          ElevatedButton(
-                            onPressed: _sendEmail,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: oliveDrab,
-                              minimumSize: const Size(double.infinity, 60.0),
-                            ),
-                            child: Text(
-                              'Send Message',
-                              style: TextStyle(color: white, fontSize: 19.0),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const MySignature(),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -7,16 +7,12 @@ class MySignature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(9.0),
       child: Column(
         children: [
           Text(
-            "Copyright © 2025 Blek Technologies.",
-            style: TextStyle(color: white, fontSize: 13.0),
-          ),
-          Text(
-            "All Rights Reserved.",
-            style: TextStyle(color: white, fontSize: 13.0),
+            "Copyright © 2024 All Rights Reserved.",
+            style: TextStyle(color: white, fontSize: 9.0),
           ),
         ],
       ),

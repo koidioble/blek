@@ -10,7 +10,7 @@ class ConnectWithMe extends StatelessWidget {
 
   final String githubUrl = 'https://github.com/koidioble';
 
-    final String facebookUrl = 'https://github.com/koidioble';
+  final String facebookUrl = 'https://www.facebook.com/spion225/';
 
   Future<void> _launchUrl(String url) async {
     final Uri uri = Uri.parse(url);

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "157072851052",
+    "project_id": "koidioble-333",
+    "storage_bucket": "koidioble-333.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157072851052:android:80a00e9cc44e73658e5849",
+        "android_client_info": {
+          "package_name": "com.example.koidio_ble"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVhf-qWZtXDQZxkAm2iQ3fGcqj1ityAEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

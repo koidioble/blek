@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:koidio_ble/pages/consultancy/mobile_development_page.dart';
+import 'package:koidio_ble/pages/consultancy/software_development_page.dart';
+import 'package:koidio_ble/pages/consultancy/web_development_page.dart';
 import 'package:koidio_ble/widgets/colors.dart';
 import 'package:koidio_ble/widgets/my_divider.dart';
 import 'package:koidio_ble/widgets/my_signature.dart';
@@ -13,6 +15,7 @@ class ConsultancyPage extends StatefulWidget {
 
 class _ConsultancyPageState extends State<ConsultancyPage> {
   final _controllerPageView = PageController(initialPage: 0);
+  bool _isSkillsHovered = false;
 
   @override
   void dispose() {
@@ -22,53 +25,117 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: lightOlive),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return MouseRegion(
+      cursor: SystemMouseCursors.grab,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: darkOlive,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: seafoamGreen),
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: InkWell(
+            hoverColor: midOlive.withValues(alpha: 0.39),
+            onTap: () {},
+            child: MouseRegion(
+              onEnter: (event) => setState(() => _isSkillsHovered = true),
+              onExit: (event) => setState(() => _isSkillsHovered = false),
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Text(
+                  "Skills",
+                  style: TextStyle(
+                    color: _isSkillsHovered ? oliveDrab : white,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 3.0,
+                    fontSize: 13.0,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 0.9,
+                        color: cornsilk.withValues(alpha: 0.6),
+                        offset: const Offset(0.3, 0.3),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          centerTitle: true,
         ),
-        title: Text("What I Do.", style: TextStyle(color: lightOlive)),
-        centerTitle: true,
-      ),
-      backgroundColor: white,
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            InkWell(
-              hoverColor: lightOlive,
-              onTap: () {},
+        // Remove the scaffold background color
+        backgroundColor: darkCyan.withValues(alpha: 0.69),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: InkWell(
+            hoverColor: darkOlive,
+            highlightColor: darkCyan,
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(0.3),
               child: Card(
+                color: lightOlive,
+                elevation: 9.0,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(3.0)),
                 ),
-                elevation: 9.0,
-                color: white,
                 child: Container(
-                  height: 699.0,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(9.0),
-                    color: white,
+                    gradient: LinearGradient(
+                      colors: [darkOlive, lightOlive],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Scaffold(
-                      backgroundColor: transparentColor,
-                      body: PageView(
-                        scrollDirection: Axis.horizontal,
-                        controller: _controllerPageView,
-                        onPageChanged: (index) {
-                          ('Page ${index + 1}');
-                        },
-                        children: [
-                          SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Row(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(9.0),
+                      child: Card(
+                        color: lightOlive,
+                        elevation: 9.0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(3.0)),
+                        ),
+                        child: Container(
+                          constraints: BoxConstraints(
+                            maxWidth: MediaQuery.sizeOf(context).width,
+                            minHeight: MediaQuery.of(context).size.height,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [darkOlive, lightOlive],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                            border: Border.all(color: lightOlive),
+                            borderRadius: BorderRadius.circular(9.0),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: 16.0),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.8,
+                                child: PageView(
+                                  scrollDirection: Axis.vertical,
+                                  controller: _controllerPageView,
+                                  physics: const ClampingScrollPhysics(),
+                                  onPageChanged: (index) {
+                                    debugPrint('Page ${index + 1}');
+                                  },
+                                  children: const [
+                                    WebDevelopmentPage(),
+                                    MobileDevelopmentPage(),
+                                    SoftwareDevelopmentPage(),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                ),
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     IconButton(
@@ -81,8 +148,8 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                                 curve: Curves.easeInOut,
                                               ),
                                       icon: Icon(
-                                        Icons.keyboard_arrow_left_outlined,
-                                        color: lightOlive,
+                                        Icons.keyboard_arrow_up,
+                                        color: turquoise,
                                       ),
                                     ),
                                     IconButton(
@@ -94,810 +161,28 @@ class _ConsultancyPageState extends State<ConsultancyPage> {
                                             curve: Curves.easeInOut,
                                           ),
                                       icon: Icon(
-                                        Icons.keyboard_arrow_right_outlined,
-                                        color: lightOlive,
+                                        Icons.keyboard_arrow_down,
+                                        color: turquoise,
                                       ),
                                     ),
                                   ],
                                 ),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: Text(
-                                    'Web Development',
-                                    style: TextStyle(
-                                      color: lightOlive,
-                                      fontSize: 19.0,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: lightOlive,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(0.0),
-                                  child: Card.filled(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    color: transparentColor,
-                                    child: Card(
-                                      elevation: 19,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(3.33),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: lightGreen300,
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  " ✦ With High-Quality Design ✦ ",
-                                                  style: TextStyle(
-                                                    color: darkOlive,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(3.33),
-                                    ),
-                                  ),
-                                  borderOnForeground: true,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: white),
-                                      borderRadius: BorderRadius.circular(3.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen300,
-                                        onTap: () {},
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              "Create visually appealing and unique websites.",
-                                              style: TextStyle(
-                                                color: darkOlive,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Card(
-                                    elevation: 19,
-                                    color: lightGreen300,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(0.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: darkOlive),
-                                        borderRadius: BorderRadius.circular(3),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(9.0),
-                                        child: InkWell(
-                                          onTap: () {},
-                                          child: Text(
-                                            " ✦ Scalability ✦ ",
-                                            style: TextStyle(color: darkOlive),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(3.33),
-                                    ),
-                                  ),
-                                  borderOnForeground: true,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: white),
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen300,
-                                        onTap: () {},
-                                        child: Text(
-                                          "Ensuring it evolves with needs.",
-                                          style: TextStyle(color: darkOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Card(
-                                    elevation: 19,
-                                    color: lightGreen300,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(0.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: darkOlive),
-                                        borderRadius: BorderRadius.circular(3),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(9.0),
-                                        child: Text(
-                                          " ✦ Improved User Experience ✦ ",
-                                          style: TextStyle(color: darkOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(3.0),
-                                    ),
-                                  ),
-                                  borderOnForeground: true,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: white),
-                                      borderRadius: BorderRadius.circular(3.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen300,
-                                        splashColor: lightGreen300,
-                                        onTap: () {},
-                                        child: Text(
-                                          "Higher user satisfaction and retention rates.",
-                                          style: TextStyle(color: darkOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Card(
-                                    color: lightGreen300,
-                                    elevation: 19,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(0.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: darkOlive),
-                                        borderRadius: BorderRadius.circular(3),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(9.0),
-                                        child: Text(
-                                          " ✦ Ongoing Support & Maintenance ✦ ",
-                                          style: TextStyle(color: darkOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(3.0),
-                                    ),
-                                  ),
-                                  borderOnForeground: true,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(9.0),
-                                    child: InkWell(
-                                      hoverColor: lightGreen300,
-                                      onTap: () {},
-                                      child: Text(
-                                        "Keeping sites functional and up-to-date.",
-                                        style: TextStyle(color: darkOlive),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 90.0),
-
-                                const MyDivider(),
-                                Text(
-                                  "1 / 3",
-                                  style: GoogleFonts.ubuntuMono(
-                                    color: lightOlive,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SingleChildScrollView(
-                            child: Container(
-                              color: transparentColor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                        onPressed:
-                                            () => _controllerPageView
-                                                .previousPage(
-                                                  duration: const Duration(
-                                                    seconds: 1,
-                                                  ),
-                                                  curve: Curves.easeInOut,
-                                                ),
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_left_outlined,
-                                          color: lightOlive,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed:
-                                            () => _controllerPageView.nextPage(
-                                              duration: const Duration(
-                                                seconds: 1,
-                                              ),
-                                              curve: Curves.easeInOut,
-                                            ),
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_right_outlined,
-                                          color: lightOlive,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  Padding(
-                                    padding: const EdgeInsets.all(30.0),
-                                    child: Text(
-                                      'Mobile Development',
-                                      style: TextStyle(
-                                        color: lightOlive,
-                                        fontSize: 19.0,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: lightOlive,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 19,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: lightGreen100,
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Cross-Platform Development ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "(iOS, Android, web, and desktop.)",
-                                          style: TextStyle(color: midOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 19,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: lightGreen100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Faster Development ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Hot reload allowing real-time changes.",
-                                          style: TextStyle(color: midOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 19,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: lightGreen100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Access to a Rich Ecosystem of Plugins ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Variety of plugins for integration.",
-                                          style: TextStyle(color: midOlive),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 19,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: lightGreen100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Single Codebase ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: lightGreen100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Testing & maintaining are straightforward.",
-                                          style: TextStyle(color: midOlive),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 90),
-                                  const MyDivider(),
-                                  Text(
-                                    "2 / 3",
-                                    style: GoogleFonts.ubuntuMono(
-                                      color: lightOlive,
-                                    ),
-                                  ),
-                                ],
                               ),
-                            ),
+                              const SizedBox(height: 33.0),
+                              const MyDivider(),
+                              const SizedBox(height: 16.0),
+                              const MySignature(),
+                              const SizedBox(height: 16.0),
+                            ],
                           ),
-                          SingleChildScrollView(
-                            child: Container(
-                              color: transparentColor,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                        onPressed:
-                                            () => _controllerPageView
-                                                .previousPage(
-                                                  duration: const Duration(
-                                                    seconds: 1,
-                                                  ),
-                                                  curve: Curves.easeInOut,
-                                                ),
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_left_outlined,
-                                          color: lightOlive,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed:
-                                            () => _controllerPageView.nextPage(
-                                              duration: const Duration(
-                                                seconds: 1,
-                                              ),
-                                              curve: Curves.easeInOut,
-                                            ),
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_right_outlined,
-                                          color: lightOlive,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  Padding(
-                                    padding: const EdgeInsets.all(30.0),
-                                    child: Text(
-                                      'Software Development',
-                                      style: TextStyle(
-                                        color: lightOlive,
-                                        fontSize: 19.0,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: lightOlive,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 19,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: green100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Cost Efficiency ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: green100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Can handle both front-end and back-end development.",
-                                          style: TextStyle(color: midOlive),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 9,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: green100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Holistic Understanding ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: green100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Comprehensive understanding of the entire process.",
-                                          style: TextStyle(color: midOlive),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 9,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: green100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Improved Problem-Solving ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: green100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Find quick and effective solutions to problems.",
-                                          style: TextStyle(color: midOlive),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Card(
-                                      elevation: 9,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(0.0),
-                                        ),
-                                      ),
-                                      borderOnForeground: true,
-                                      color: green100,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: darkOlive),
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(9.0),
-                                          child: Text(
-                                            " ✦ Greater Project Control ✦ ",
-                                            style: TextStyle(
-                                              color: darkOlive,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Card(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(3.0),
-                                      ),
-                                    ),
-                                    borderOnForeground: true,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: InkWell(
-                                        hoverColor: green100,
-                                        splashColor: Colors.lightGreen[300],
-                                        onTap: () {},
-                                        child: Text(
-                                          "Ensure consistency & quality throughout the process.",
-                                          style: TextStyle(color: midOlive),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 90),
-                                  const MyDivider(),
-                                  Text(
-                                    "3 / 3",
-                                    style: GoogleFonts.ubuntuMono(
-                                      color: lightOlive,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            const MySignature(),
-          ],
+          ),
         ),
       ),
     );

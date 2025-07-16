@@ -1,37 +1,26 @@
 name: koidio_ble
-description: "Koidio Blé - Personal portfolio and resume showcasing."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: "Koidio Y. Blé - Personal portfolio and resume showcasing."
+publish_to: 'none'
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-# In Windows, build-name is used as the major, minor, and patch parts
-# of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
 
 environment:
   sdk: ^3.7.2
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
+  ambient_gradient_border: ^1.0.0
+  animated_text_kit: ^4.2.3
+  clarity_flutter: ^1.0.0
+  cloud_firestore: ^5.6.9
   cupertino_icons: ^1.0.8
   expansion_tile_group: ^2.3.0
+  firebase_analytics: ^11.5.0
+  firebase_core: ^3.14.0
+  flexible_animated_container: ^0.0.5
   flutter:
     sdk: flutter
+  flutter_custom_cursor: ^0.0.4
+  flutter_dash_border_animated: ^0.0.5
   flutter_launcher_icons: ^0.14.4
   font_awesome_flutter: ^10.8.0
   google_fonts: ^6.2.1
@@ -44,29 +33,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-# The following section is specific to Flutter packages.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+
   assets:
     - assets/pics/pic.png
-    - assets/logo/gmail_logo.png
-    - assets/logo/github_logo.png
-    - assets/logo/linkedin_logo.png
-    - assets/logo/instagram_logo.png
+
     - assets/logo/siikaa_icon_logo.png
     - assets/logo/128_siikaa.png
-    - assets/logo/portfolio_legacy_pic.png
-    - assets/logo/512_kb_logo.png
     - assets/logo/512_white_bk.png
     - assets/logo/512_white_bk_inverted.png
     - assets/logo/300_white_bk.png
@@ -80,10 +55,34 @@ flutter:
     - assets/pics/about1.png
     - assets/logo/bled_logo512.png
 
+    # Logos
+    - assets/logo/ci_cd_logo.png
+    - assets/logo/firebase_logo.png
+    - assets/logo/docker_logo.png
+    - assets/logo/gmail_logo.png
+    - assets/logo/github_logo.png
+    - assets/logo/linkedin_logo.png
+    - assets/logo/instagram_logo.png
+    - assets/logo/react_logo.png
+    - assets/logo/css_logo.png
+    - assets/logo/java_logo.png
+    - assets/logo/php_logo.png
+    - assets/logo/python_logo.png
+    - assets/logo/html_logo.png
+    - assets/logo/flutter_logo.png
+    - assets/logo/sqlite_logo.png
+    - assets/logo/javascript_logo.png
+    - assets/logo/node_logo.png
+    - assets/logo/kobo_logo.png
+    - assets/logo/mysql_logo.png
+    - assets/logo/sql_server_logo.png
+
 flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/logo/512_white_bk.png"
+  macos: true
+  windows: true
   web:
     generate: true
     image_path: "assets/logo/512_white_bk.png"
