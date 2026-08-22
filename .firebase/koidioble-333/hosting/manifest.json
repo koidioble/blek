@@ -1,11 +1,11 @@
 {
-    "name": "Koidio Blé",
-    "short_name": "Koidio Blé",
+    "name": "Koidio Y. Blé",
+    "short_name": "Koidio Y. Blé",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Koidio Blé - Personal portfolio and resume showcasing.",
+    "description": "Koidio Y. Blé - Personal portfolio and resume showcasing.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

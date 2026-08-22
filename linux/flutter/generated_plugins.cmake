@@ -3,7 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  flutter_custom_cursor
+  flutter_localization
+  gtk
   url_launcher_linux
 )
 

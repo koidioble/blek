@@ -1,11 +1,11 @@
 {
-    "name": "Koidio Blé",
-    "short_name": "Koidio Blé",
+    "name": "Koidio Y. Blé | Software Engineer",
+    "short_name": "KYB",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Koidio Blé - Personal portfolio and resume showcasing.",
+    "background_color": "#0A0A0F",
+    "theme_color": "#0A0A0F",
+    "description": "Portfolio of Koidio Y. Blé, a software engineer building cross-platform products and modern web systems.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

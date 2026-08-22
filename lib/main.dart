@@ -1,143 +1,137 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:koidio_ble/pages/home/home_page.dart';
-import 'package:koidio_ble/widgets/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:koidio_ble/pages/portfolio/portfolio_page.dart'; // ← NEW
+import 'package:koidio_ble/services/activity_monitor.dart';
+import 'package:koidio_ble/services/supabase_auth_service.dart';
+import 'package:koidio_ble/theme/theme_provider.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SupabaseAuthService.initialize();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+
+  // Dark portfolio — status bar icons light, nav bar dark
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light, // ← changed
+      systemNavigationBarColor: Color(0xFF0A0A0F), // ← changed
+      systemNavigationBarIconBrightness: Brightness.light, // ← changed
+    ),
+  );
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Koidio Y. Blé',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
-        fontFamily: GoogleFonts.ubuntu().fontFamily,
-        primaryColor: lightOlive,
-        useMaterial3: true,
-      ),
-      home: SplashScreen(),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
+class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    print('Debug: SplashScreen initState called');
+    _setupAuthListener();
+  }
 
-    Future.delayed(Duration(seconds: 3), () {
-      print('Debug: Splash screen delay completed');
-      if (!mounted) return;
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
+  void _setupAuthListener() {
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      debugPrint('🔐 Auth Event: ${data.event}');
     });
 
-    try {
-      (screenName: 'splash_screen');
-      print('Debug: Analytics event logged');
-    } catch (e) {
-      print('Debug: Analytics error - $e');
-    }
+    SupabaseAuthService.setInactivityLogoutCallback(() {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Logged out due to inactivity'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Debug: SplashScreen build called');
-    return Scaffold(
-      backgroundColor: darkOlive,
-      body: MouseRegion(
-        cursor: SystemMouseCursors.grab,
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [darkOlive, midOlive],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+    return Consumer<ThemeProvider>(
+      builder: (_, themeProvider, _) {
+        return MaterialApp(
+          title: 'Koidio Y. Blé | Software Engineer',
+          debugShowCheckedModeBanner: false,
+          scrollBehavior: AppScrollBehavior(),
+
+          // Google Fonts applied on top of your existing themes — unchanged
+          theme: ThemeProvider.lightTheme.copyWith(
+            textTheme: GoogleFonts.plusJakartaSansTextTheme(
+              ThemeProvider.lightTheme.textTheme,
             ),
           ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(9.0),
-              child: AnimatedTextKit(
-                animatedTexts: [
-                  WavyAnimatedText(
-                    "KOIDIO",
-                    // style: GoogleFonts.tektur(
-                    //   color: seafoamGreen,
-                    //   fontSize: 99.0,
-                    //   shadows: [
-                    //     Shadow(
-                    //       blurRadius: 9.0,
-                    //       color: lightSeaGreen,
-                    //       offset: Offset(6.0, 6.0),
-                    //     ),
-                    //   ],
-                    // ),
-                    //   style: GoogleFonts.suravaram(
-                    //     color: seafoamGreen,
-                    //     fontSize: 99.0,
-                    //     fontWeight: FontWeight.w600,
-                    //     shadows: [
-                    //       Shadow(
-                    //         blurRadius: 9.0,
-                    //         color: lightSeaGreen,
-                    //         offset: Offset(6.0, 6.0),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    //   style: GoogleFonts.orbitron(
-                    //     color: seafoamGreen,
-                    //     fontSize: 99.0,
-                    //     fontWeight: FontWeight.w600,
-                    //     shadows: [
-                    //       Shadow(
-                    //         blurRadius: 9.0,
-                    //         color: lightSeaGreen,
-                    //         offset: Offset(6.0, 6.0),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    textStyle: GoogleFonts.courierPrime(
-                      color: oliveDrab,
-                      fontSize: 69.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 3.0,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 30.0,
-                          color: lightOlive.withValues(alpha: 6.0),
-                          offset: Offset(6.0, 6.0),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-                isRepeatingAnimation: false,
-              ),
+          darkTheme: ThemeProvider.darkTheme.copyWith(
+            textTheme: GoogleFonts.plusJakartaSansTextTheme(
+              ThemeProvider.darkTheme.textTheme,
             ),
           ),
-        ),
-      ),
+          themeMode: themeProvider.themeMode,
+
+          locale: themeProvider.locale,
+
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: const TextScaler.linear(1.0)),
+              child: child!,
+            );
+          },
+
+          // ActivityMonitor preserved — wraps PortfolioPage instead of MainScreen
+          home: ActivityMonitor(
+            onInactivityLogout: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Logged out due to inactivity'),
+                  backgroundColor: Colors.orange,
+                ),
+              );
+            },
+            child: const PortfolioPage(), // ← swapped, no scroll wiring needed
+          ),
+        );
+      },
     );
+  }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.stylus,
+  };
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const BouncingScrollPhysics();
   }
 }

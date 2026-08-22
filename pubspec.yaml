@@ -8,25 +8,31 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
-  ambient_gradient_border: ^1.0.0
-  animated_text_kit: ^4.2.3
-  clarity_flutter: ^1.0.0
-  cloud_firestore: ^5.6.9
+  animate_do: ^4.2.0
+  animated_text_kit: ^4.3.0
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
-  expansion_tile_group: ^2.3.0
-  firebase_analytics: ^11.5.0
-  firebase_core: ^3.14.0
-  flexible_animated_container: ^0.0.5
   flutter:
     sdk: flutter
-  flutter_custom_cursor: ^0.0.4
-  flutter_dash_border_animated: ^0.0.5
   flutter_launcher_icons: ^0.14.4
-  font_awesome_flutter: ^10.8.0
-  google_fonts: ^6.2.1
-  mailer: ^6.4.1
-  path_provider: ^2.1.5
+  flutter_localization: ^0.3.3
+  flutter_localizations:
+    sdk: flutter
+  flutter_staggered_animations: ^1.1.1
+  flutter_svg: ^2.3.0
+  flutter_tilt: ^3.3.2
+  font_awesome_flutter: ^11.0.0
+  glassmorphism_ui: ^0.3.0
+  google_fonts: ^8.0.2
+  http: ^1.6.0
+  intl: ^0.20.2
+  lottie: ^3.3.3
+  provider: ^6.1.1
+  shared_preferences: ^2.5.3
+  shimmer: ^3.0.0
+  supabase_flutter: ^2.10.3
   url_launcher: ^6.3.1
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_lints: ^6.0.0
@@ -38,52 +44,40 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/pics/pic.png
 
-    - assets/logo/siikaa_icon_logo.png
-    - assets/logo/128_siikaa.png
-    - assets/logo/512_white_bk.png
-    - assets/logo/512_white_bk_inverted.png
-    - assets/logo/300_white_bk.png
-    - assets/logo/bk_logo.png
-    - assets/logo/IMG_1859.png
-    - assets/pics/consultant1_min.png
-    - assets/pics/contact1_min.png
-    - assets/pics/consultant2_min.png
-    - assets/pics/contact2_min.png
-    - assets/pics/contact3_min.png
-    - assets/pics/about1.png
-    - assets/logo/bled_logo512.png
+    #Logo
+    - assets/logo/KYB_icon_dark.png
+    - assets/logo/KYB_icon_light.png
 
-    # Logos
-    - assets/logo/ci_cd_logo.png
-    - assets/logo/firebase_logo.png
-    - assets/logo/docker_logo.png
-    - assets/logo/gmail_logo.png
-    - assets/logo/github_logo.png
-    - assets/logo/linkedin_logo.png
-    - assets/logo/instagram_logo.png
-    - assets/logo/react_logo.png
-    - assets/logo/css_logo.png
-    - assets/logo/java_logo.png
-    - assets/logo/php_logo.png
-    - assets/logo/python_logo.png
-    - assets/logo/html_logo.png
-    - assets/logo/flutter_logo.png
-    - assets/logo/sqlite_logo.png
-    - assets/logo/javascript_logo.png
-    - assets/logo/node_logo.png
-    - assets/logo/kobo_logo.png
-    - assets/logo/mysql_logo.png
-    - assets/logo/sql_server_logo.png
+    # Pictures
+    - assets/pics/half_body.JPG
+  
+
+
+    # json
+    - assets/json/tech1.json
+    - assets/json/tech2.json
+    - assets/json/tech3.json
+    - assets/json/tech4.json
+
+    #portfolio
+    - assets/portfolio/nkommo_cover.webp
+    - assets/portfolio/ma_cacaoyere_cover.webp
+    - assets/portfolio/babylon_ai_cover.webp
+    - assets/portfolio/digba_gym_cover.webp
+    - assets/portfolio/salon_booking_cover.webp
+    - assets/portfolio/siikaa_ai_cover.webp
+    - assets/portfolio/harmattan_cover.webp
+
+
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/logo/512_white_bk.png"
+  image_path: "assets/pics/bio.png"
   macos: true
   windows: true
   web:
     generate: true
-    image_path: "assets/logo/512_white_bk.png"
-    favicon_path: "assets/logo/512_white_bk.png"
+    image_path: "assets/pics/bio.png"
+    favicon_path: "assets/pics/bio.png"
