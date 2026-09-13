@@ -36,82 +36,116 @@ class PortfolioHomeSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(pad, isMobile ? 48 : 72, pad, 0),
+          padding: EdgeInsets.fromLTRB(pad, isMobile ? 9.0 : 30.0, pad, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: isMobile ? 144.0 : 220.0,
-                height: isMobile ? 144.0 : 220.0,
+                width: 220.0,
+                height: 220.0,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
                   image: DecorationImage(
-                    image: AssetImage('assets/pics/half_body.JPG'),
+                    image: AssetImage('assets/pics/pic2.webp'),
                     fit: BoxFit.fitHeight,
                   ),
                 ),
               ),
-              const SizedBox(height: 32),
-
-              Text(
-                'Koidio Y. Blé'
-                '\nSoftware Engineer',
-                style: pStyle(
-                  size: isMobile ? 19.0 : 30.0,
-                  weight: FontWeight.w700,
-                  color: theme.text,
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 760),
-                child: Text(
-                  'I build polished cross-platform products, modern web applications, '
-                  'and cloud-connected systems—from user experience to deployment.',
-                  style: pStyle(
-                    size: isMobile ? 16.0 : 19.0,
-                    color: theme.text,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 720),
-                child: Text(
-                  'I work across Flutter, Dart, React, Next.js, TypeScript, Firebase, '
-                  'Supabase, PostgreSQL, REST APIs, and cloud services—building responsive '
-                  'interfaces, managing application state, integrating data, and delivering '
-                  'production-minded software experiences.',
-                  style: pStyle(
-                    size: isMobile ? 13.0 : 16.0,
-                    color: theme.muted,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 13.0),
+              const SizedBox(height: 33.0),
 
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 720.0),
-                child: Text(
-                  'Computer and Electronics Engineering graduate.'
-                  'I bring systems thinking, product ownership, '
-                  'and hands-on experience delivering user-focused software from concept '
-                  'through deployment.',
-                  style: pStyle(
-                    size: isMobile ? 13.0 : 16.0,
-                    color: theme.muted,
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: InkWell(
+                    onTap: onViewWork,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        //color: theme.accent2.withValues(alpha: 0.09),
+                        border: Border.all(color: theme.accent2),
+                        borderRadius: BorderRadius.circular(9.0),
+                      ),
+                      padding: const EdgeInsets.all(9.0),
+                      child: Text(
+                        'Koidio Y. Blé | '
+                        'Software Engineer\n'
+                        'Mobile, Web & Cloud Applications',
+                        style: TextStyle(
+                          // backgroundColor: theme.accent,
+                          //color: theme.text,
+                          fontSize: 13.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 9.0),
+
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 720.0),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: InkWell(
+                    onTap: onViewWork,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: theme.accent2),
+                        borderRadius: BorderRadius.circular(9.0),
+                      ),
+                      padding: const EdgeInsets.all(9.0),
+                      child: Text(
+                        'Computer and Electronics Engineering graduate. '
+                        'I bring systems thinking, product ownership, and '
+                        'hands-on software development experience to deliver user-focused products '
+                        'from concept through deployment.',
+                        style: TextStyle(
+                          //backgroundColor: theme.accent2,
+                          color: theme.text,
+                          fontSize: 13.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 9.0),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 720.0),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: InkWell(
+                    onTap: onViewWork,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        //color: theme.accent2.withValues(alpha: 0.09),
+                        border: Border.all(color: theme.accent2),
+                        borderRadius: BorderRadius.circular(9.0),
+                      ),
+                      padding: const EdgeInsets.all(9.0),
+                      child: Text(
+                        'I build polished cross-platform products, modern web applications, '
+                        'and cloud-connected systems. From user experience to deployment. '
+                        'Cloud services—building responsive '
+                        'interfaces, managing application state, integrating data, and delivering '
+                        'production-minded software experiences.',
+                        style: TextStyle(
+                          backgroundColor: theme.accent2,
+                          //color: theme.text,
+                          fontSize: 13.0,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 30.0),
+              SizedBox(height: isMobile ? 30.0 : 9.0),
 
               Wrap(
-                spacing: 12,
-                runSpacing: 12,
+                spacing: 13.0,
+                runSpacing: 13.0,
                 children: [
                   _HeroButton(
                     label: 'View Projects',
@@ -119,13 +153,6 @@ class PortfolioHomeSection extends StatelessWidget {
                     filled: true,
                     theme: theme,
                   ),
-                  if (onResume != null)
-                    _HeroButton(
-                      label: 'Download Résumé',
-                      onTap: onResume!,
-                      filled: false,
-                      theme: theme,
-                    ),
                   if (onGitHub != null)
                     _HeroButton(
                       label: 'GitHub',
@@ -185,8 +212,8 @@ class PortfolioHomeSection extends StatelessWidget {
               const SizedBox(height: 12),
 
               Wrap(
-                spacing: 8,
-                runSpacing: 4,
+                spacing: 9.0,
+                runSpacing: 3.0,
                 children: [
                   _QuickLink(label: 'About Me', onTap: onAboutMe, theme: theme),
                   _QuickLink(
@@ -309,11 +336,11 @@ class _HeroButtonState extends State<_HeroButton> {
           decoration: BoxDecoration(
             color:
                 widget.filled
-                    ? (_hovered ? accent.withValues(alpha: 0.88) : accent)
+                    ? (_hovered ? accent.withValues(alpha: 0.9) : accent)
                     : (_hovered
-                        ? widget.theme.border.withValues(alpha: 0.55)
+                        ? widget.theme.accent2.withValues(alpha: 0.6)
                         : Colors.transparent),
-            borderRadius: BorderRadius.circular(9),
+            borderRadius: BorderRadius.circular(9.0),
             border: Border.all(
               color: widget.filled ? Colors.transparent : widget.theme.border,
             ),

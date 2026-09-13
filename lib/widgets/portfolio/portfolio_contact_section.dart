@@ -27,7 +27,7 @@ class PortfolioContactSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: pad),
           child: Text(
-            "LET'S TALK",
+            "CONTACT",
             style: pStyle(
               size: 13.0,
               weight: FontWeight.w600,
@@ -40,21 +40,7 @@ class PortfolioContactSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: pad),
           child: Container(height: 1.0, width: 300.0, color: theme.accent),
         ),
-        SizedBox(height: 30.0),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: pad),
-          child: Text(
-            "Get In Touch",
-            style: pStyle(weight: FontWeight.w600, color: t.text, size: 19.0),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: pad),
-          child: Text(
-            "Open to full-time engineering and core technical collaboration.",
-            style: pStyle(color: t.muted, height: 1.9),
-          ),
-        ),
+
         Padding(
           padding: EdgeInsets.symmetric(horizontal: pad, vertical: 44.0),
           child:
@@ -98,14 +84,8 @@ class _ContactInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = theme;
+    final isMobile = MediaQuery.of(context).size.width < 700;
     final List<(FaIconData, Color, String, String, String)> links = [
-      (
-        FontAwesomeIcons.envelope,
-        t.accent,
-        'Email',
-        'mailto:koidioble@gmail.com',
-        'email',
-      ),
       (
         FontAwesomeIcons.linkedinIn,
         t.accent,
@@ -125,10 +105,6 @@ class _ContactInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── "Available" status chip ──
-        _AvailabilityBadge(theme: t),
-        const SizedBox(height: 19.0),
-
         // ── Headline ──
         ShaderMask(
           shaderCallback:
@@ -138,20 +114,24 @@ class _ContactInfo extends StatelessWidget {
                 end: Alignment.bottomRight,
               ).createShader(bounds),
           child: Text(
-            'Let’s build useful software.',
-            style: pStyle(weight: FontWeight.w600, height: 1.3, color: white),
+            'Let’s build.',
+            style: pStyle(
+              size: isMobile ? 22.0 : 44.0,
+              weight: FontWeight.w600,
+              height: 1.3,
+              color: white,
+            ),
           ),
         ),
-        const SizedBox(height: 9.0),
+        SizedBox(height: isMobile ? 22.0 : 44.0),
 
         // ── Body copy ──
         Text(
-          "Interested in a software engineering role, a product collaboration, "
-          "or a cross-platform build? I work across responsive application "
+          "I work across responsive application "
           "experiences, APIs, authentication, cloud-backed data, and deployment. ",
           style: pStyle(color: t.muted, height: 1.9),
         ),
-        const SizedBox(height: 30.0),
+        SizedBox(height: isMobile ? 22.0 : 44.0),
 
         // ── Social icon buttons ──
         Row(
@@ -163,49 +143,15 @@ class _ContactInfo extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: 30.0),
+        const SizedBox(height: 44.0),
+
+        // ── "Available" status chip ──
       ],
     );
   }
 }
 
 // ── Availability badge ────────────────────────────────────────────────────────
-class _AvailabilityBadge extends StatelessWidget {
-  final PortfolioTheme theme;
-  const _AvailabilityBadge({required this.theme});
-
-  @override
-  Widget build(BuildContext context) {
-    final t = theme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 6.0),
-      decoration: BoxDecoration(
-        color: t.accent2.withValues(alpha: 0.09),
-        borderRadius: BorderRadius.circular(99.0),
-        border: Border.all(
-          color: t.accent2.withValues(alpha: 0.26),
-          width: 0.9,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _PulseDot(color: t.accent2),
-          const SizedBox(width: 9.0),
-          Text(
-            'Open to opportunities',
-            style: pStyle(
-              size: 13.0,
-              weight: FontWeight.w600,
-              color: t.accent2,
-              letterSpacing: 0.3,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _PulseDot extends StatefulWidget {
   final Color color;

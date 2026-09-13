@@ -17,17 +17,17 @@
 import 'package:flutter/material.dart';
 import 'package:koidio_ble/pages/my/my_colors.dart';
 import 'package:koidio_ble/pages/portfolio/portfolio_theme.dart';
-import 'package:lottie/lottie.dart';
 
 // ── Data models ──────────────────────────────────────────────────────────────
 
 class TechCardData {
-  final String label; // relationship type, e.g. "I'm good at this"
+  final String label; // relationship type
   final IconData icon;
   final String? lottieAsset; // optional — if set, used instead of icon
   final Color cardBg;
   final Color textColor;
   final Color chipBg;
+  final Color labelBg;
   final List<String> techs;
 
   const TechCardData({
@@ -37,6 +37,7 @@ class TechCardData {
     required this.cardBg,
     required this.textColor,
     required this.chipBg,
+    required this.labelBg,
     required this.techs,
   });
 }
@@ -108,7 +109,9 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _crossPlatform.icon,
           cardBg: _crossPlatform.bg,
           textColor: _crossPlatform.text,
-          chipBg: deepSkyBlue.withValues(alpha: 0.5),
+          lottieAsset: 'assets/json/tech7.json',
+          chipBg: deepSkyBlue.withValues(alpha: 0.4),
+          labelBg: modernIndigo.withValues(alpha: 0.9),
           techs: const [
             'Flutter',
             'Dart',
@@ -121,6 +124,8 @@ class MyTechPortfolioSection extends StatelessWidget {
             'Web',
             'App Store Connect',
             'Play Console',
+            'Android Studio',
+            'Xcode',
           ],
         ),
 
@@ -130,7 +135,9 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _web.icon,
           cardBg: _web.bg,
           textColor: _crossPlatform.text,
-          chipBg: roseGold.withValues(alpha: 0.6),
+          lottieAsset: 'assets/json/tech1.json',
+          chipBg: roseGold.withValues(alpha: 0.44),
+          labelBg: green300.withValues(alpha: 0.9),
           techs: const [
             'React',
             'Next.js',
@@ -151,7 +158,9 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _backend.icon,
           cardBg: _backend.bg,
           textColor: _backend.text,
+          lottieAsset: 'assets/json/tech3.json',
           chipBg: oliveDark,
+          labelBg: oliveDark.withValues(alpha: 0.9),
           techs: const [
             'Supabase Auth',
             'Supabase Realtime',
@@ -177,6 +186,7 @@ class MyTechPortfolioSection extends StatelessWidget {
           textColor: _delivery.text,
           lottieAsset: 'assets/json/tech4.json',
           chipBg: lightSeaGreen,
+          labelBg: lightSeaGreen.withValues(alpha: 0.9),
           techs: const [
             'Git',
             'GitHub',
@@ -257,12 +267,19 @@ class _DomainRow extends StatefulWidget {
 
 class _DomainRowState extends State<_DomainRow> {
   final ScrollController _controller = ScrollController();
-  bool _canScrollRight = true;
+  bool _canScrollLeft = false;
+  bool _canScrollRight = false;
 
   @override
   void initState() {
     super.initState();
     _controller.addListener(_updateScrollState);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _updateScrollState();
+      }
+    });
   }
 
   @override
@@ -274,8 +291,17 @@ class _DomainRowState extends State<_DomainRow> {
 
   void _updateScrollState() {
     if (!_controller.hasClients) return;
-    final max = _controller.position.maxScrollExtent;
-    setState(() => _canScrollRight = _controller.offset < max - 10);
+
+    final position = _controller.position;
+    final canScrollLeft = position.pixels > 9.0;
+    final canScrollRight = position.pixels < position.maxScrollExtent - 9.0;
+
+    if (canScrollLeft != _canScrollLeft || canScrollRight != _canScrollRight) {
+      setState(() {
+        _canScrollLeft = canScrollLeft;
+        _canScrollRight = canScrollRight;
+      });
+    }
   }
 
   void _scrollBy(double distance) {
@@ -303,7 +329,7 @@ class _DomainRowState extends State<_DomainRow> {
             TextSpan(
               text: "${widget.row.heading}\n",
               style: pStyle(
-                size: 18.0,
+                size: 22.0,
                 weight: FontWeight.w700,
                 color: widget.theme.text,
               ),
@@ -311,7 +337,7 @@ class _DomainRowState extends State<_DomainRow> {
             TextSpan(
               text: widget.row.description,
               style: pStyle(
-                size: 13.0,
+                size: 22.0,
                 weight: FontWeight.w400,
                 color: widget.theme.muted,
               ).copyWith(height: 1.4),
@@ -321,8 +347,7 @@ class _DomainRowState extends State<_DomainRow> {
       ),
     );
 
-    final cardsAndArrow = Stack(
-      alignment: Alignment.centerRight,
+    final cardsAndArrows = Stack(
       children: [
         SizedBox(
           height: cardHeight,
@@ -344,13 +369,34 @@ class _DomainRowState extends State<_DomainRow> {
             },
           ),
         ),
+
+        if (_canScrollLeft)
+          Positioned(
+            left: widget.isMobile ? widget.pad - 18.0 : 12.0,
+            top: 0,
+            bottom: 0,
+            child: Center(
+              child: _NavIconButton(
+                icon: Icons.chevron_left_rounded,
+                tooltip: 'Previous engineering capability',
+                onTap: () => _scrollBy(-(cardWidth + 14.0)),
+                theme: widget.theme,
+              ),
+            ),
+          ),
+
         if (_canScrollRight)
-          Padding(
-            padding: EdgeInsets.only(right: widget.pad - 18.0),
-            child: _NavIconButton(
-              enabled: _canScrollRight,
-              onTap: () => _scrollBy(cardWidth + 14),
-              theme: widget.theme,
+          Positioned(
+            right: widget.pad - 18.0,
+            top: 0,
+            bottom: 0,
+            child: Center(
+              child: _NavIconButton(
+                icon: Icons.chevron_right_rounded,
+                tooltip: 'Next engineering capability',
+                onTap: () => _scrollBy(cardWidth + 14.0),
+                theme: widget.theme,
+              ),
             ),
           ),
       ],
@@ -359,7 +405,7 @@ class _DomainRowState extends State<_DomainRow> {
     if (widget.isMobile) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [label, const SizedBox(height: 14.0), cardsAndArrow],
+        children: [label, const SizedBox(height: 14.0), cardsAndArrows],
       );
     }
 
@@ -367,7 +413,7 @@ class _DomainRowState extends State<_DomainRow> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(width: labelWidth, child: label),
-        Expanded(child: cardsAndArrow),
+        Expanded(child: cardsAndArrows),
       ],
     );
   }
@@ -458,31 +504,31 @@ class _CollapsedContent extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerRight,
-          child:
-              data.lottieAsset != null
-                  ? Lottie.asset(
-                    data.lottieAsset!,
-
-                    repeat: true,
-                    fit: BoxFit.contain,
-                  )
-                  : Icon(
-                    data.icon,
-                    size: 48.0,
-                    color: data.textColor.withValues(alpha: 0.9),
-                  ),
+          child: Icon(
+            data.icon,
+            size: 44.0,
+            color: data.textColor.withValues(alpha: 0.9),
+          ),
         ),
         Align(
-          alignment: Alignment.bottomLeft,
-          child: Text(
-            data.label,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: pStyle(
-              size: 13.0,
-              // weight: FontWeight.w600,
-              color: data.textColor,
-              height: 1.2,
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 6.0),
+            decoration: BoxDecoration(
+              color: data.labelBg,
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            child: Text(
+              data.label,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: pStyle(
+                size: 13.0,
+                // weight: FontWeight.w600,
+                color: data.textColor,
+                height: 1.3,
+              ),
             ),
           ),
         ),
@@ -548,12 +594,14 @@ class _ExpandedContent extends StatelessWidget {
 // ── Nav arrow: black + white icon by default, olive + white icon on hover ───
 
 class _NavIconButton extends StatefulWidget {
-  final bool enabled;
+  final IconData icon;
+  final String tooltip;
   final VoidCallback onTap;
   final PortfolioTheme theme;
 
   const _NavIconButton({
-    required this.enabled,
+    required this.icon,
+    required this.tooltip,
     required this.onTap,
     required this.theme,
   });
@@ -567,34 +615,34 @@ class _NavIconButtonState extends State<_NavIconButton> {
 
   @override
   Widget build(BuildContext context) {
-    final active = widget.enabled;
-    final showAccent = _hovered && active;
-
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      cursor: active ? SystemMouseCursors.click : SystemMouseCursors.basic,
-      child: GestureDetector(
-        onTap: active ? widget.onTap : null,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 160),
-          width: 40.0,
-          height: 40.0,
-          decoration: BoxDecoration(
-            color: showAccent ? widget.theme.accent : Colors.black,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.15),
-                blurRadius: 8.0,
-                offset: const Offset(0, 3),
+    return Semantics(
+      button: true,
+      label: widget.tooltip,
+      child: Tooltip(
+        message: widget.tooltip,
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _hovered = true),
+          onExit: (_) => setState(() => _hovered = false),
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: widget.onTap,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 160),
+              width: 40.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                color: _hovered ? widget.theme.accent : Colors.black,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.18),
+                    blurRadius: 8.0,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: const Icon(
-            Icons.chevron_right_rounded,
-            size: 20.0,
-            color: Colors.white,
+              child: Icon(widget.icon, size: 20.0, color: Colors.white),
+            ),
           ),
         ),
       ),

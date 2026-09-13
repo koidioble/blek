@@ -243,10 +243,10 @@ final List<ProjectData> portfolioProjects = [
       'Supabase Hosting',
       'Firebase Hosting',
     ],
-    webUrl: 'https://admin-novact.web.app',
+    webUrl: 'https://ma-cacaoyere.web.app',
     status: 'Live',
     detailDescription:
-        'Ma Cacaoyère supports cacao-producer field operations in West Africa. '
+        'Ma Cacaoyère supports cacao-producer field operations for my intern development work. '
         'I built a Flutter mobile workflow for agents to capture producer and survey data, '
         'alongside a TypeScript web dashboard for coordinators to review, organize, and '
         'manage field information. The system uses Supabase Auth, PostgreSQL, Storage, '
@@ -266,13 +266,19 @@ final List<ProjectData> portfolioProjects = [
     logoAsset: 'assets/portfolio/nkommo_cover.webp',
     description:
         'A quiet, focused space to share real experiences, explore cultures, and learn together — '
-        'built by an immigrant and live on the App Store.',
+        'live on the App Store.',
     icon: Icons.forum_rounded,
     color: ProjectColor.cornsilk,
     badges: ['Flutter', 'iOS', 'Social', 'Diaspora'],
     stack: [
       'Flutter',
       'Dart',
+      'Xcode',
+      'Visual Studio Code',
+      'Swift',
+      'iOS',
+      'Objective-C',
+      'C/C++',
       'BLoC',
       'Firebase Auth',
       'Cloud Firestore',
@@ -283,7 +289,8 @@ final List<ProjectData> portfolioProjects = [
       'App Store Connect',
       'Supabase',
     ],
-    webUrl: 'https://nkommo.space',
+    webUrl:
+        'https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://apps.apple.com/us/app/nkommo/id6759795970&ved=2ahUKEwjoq9CWqOuWAxUP4MkDHb5INIcQFnoECBkQAQ&usg=AOvVaw0Orl5NGnrHnQ6nrSnO-bzO',
     status: 'Live on App Store',
     detailDescription:
         'A Flutter social and community application for sharing diaspora stories '
@@ -462,37 +469,37 @@ final List<ProjectData> portfolioProjects = [
     ],
   ),
 
-  const ProjectData(
-    name: 'Digba Gym',
-    logoAsset: 'assets/portfolio/digba_gym_cover.webp',
-    description:
-        'Fitness and gym management app built with Flutter — member tracking, '
-        'session scheduling, and workout planning on web and mobile.',
-    icon: Icons.fitness_center_rounded,
-    color: ProjectColor.teal,
-    badges: ['Flutter', 'Firebase', 'Fitness', 'PWA'],
-    stack: [
-      'Flutter',
-      'Dart',
-      'Cloud Firestore',
-      'Firebase Hosting',
-      'Member Management',
-      'Scheduling',
-      'Workout Planning',
-      'Responsive Web',
-    ],
-    webUrl: 'https://digbagym.web.app',
-    status: 'Live',
-    detailDescription:
-        'Digba Gym is a fitness management application built with Flutter and Firebase. '
-        'Handles member management, session scheduling, and workout tracking with a '
-        'clean, performant interface deployable across web and mobile from a single codebase.',
-    highlights: [
-      'Member tracking and gym management',
-      'Session scheduling and workout planning',
-      'Flutter — single codebase, web and mobile',
-      'Cloud Firestore real-time backend',
-      'Firebase Hosting deployment',
-    ],
-  ),
+  // const ProjectData(
+  //   name: 'Digba Gym',
+  //   logoAsset: 'assets/portfolio/digba_gym_cover.webp',
+  //   description:
+  //       'Fitness and gym management app built with Flutter — member tracking, '
+  //       'session scheduling, and workout planning on web and mobile.',
+  //   icon: Icons.fitness_center_rounded,
+  //   color: ProjectColor.teal,
+  //   badges: ['Flutter', 'Firebase', 'Fitness', 'PWA'],
+  //   stack: [
+  //     'Flutter',
+  //     'Dart',
+  //     'Cloud Firestore',
+  //     'Firebase Hosting',
+  //     'Member Management',
+  //     'Scheduling',
+  //     'Workout Planning',
+  //     'Responsive Web',
+  //   ],
+  //   webUrl: 'https://digbagym.web.app',
+  //   status: 'Live',
+  //   detailDescription:
+  //       'Digba Gym is a fitness management application built with Flutter and Firebase. '
+  //       'Handles member management, session scheduling, and workout tracking with a '
+  //       'clean, performant interface deployable across web and mobile from a single codebase.',
+  //   highlights: [
+  //     'Member tracking and gym management',
+  //     'Session scheduling and workout planning',
+  //     'Flutter — single codebase, web and mobile',
+  //     'Cloud Firestore real-time backend',
+  //     'Firebase Hosting deployment',
+  //   ],
+  // ),
 ];
