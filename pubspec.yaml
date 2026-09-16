@@ -63,6 +63,9 @@ flutter:
     - assets/portfolio/siikaa_cover.webp
     - assets/portfolio/harmattan_cover.webp
 
+    #agent
+    - assets/data/portfolio_agent_knowledge.json
+
 
 
 flutter_launcher_icons:

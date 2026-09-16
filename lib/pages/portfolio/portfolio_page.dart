@@ -4,6 +4,7 @@ import 'package:koidio_ble/pages/portfolio/portfolio_section_page.dart';
 import 'package:koidio_ble/pages/portfolio/portfolio_theme.dart';
 import 'package:koidio_ble/theme/theme_provider.dart';
 import 'package:koidio_ble/widgets/portfolio/portfolio_about_section.dart';
+import 'package:koidio_ble/widgets/portfolio/portfolio_agent_sheet.dart';
 import 'package:koidio_ble/widgets/portfolio/portfolio_contact_section.dart';
 import 'package:koidio_ble/widgets/portfolio/portfolio_home_section.dart';
 import 'package:koidio_ble/widgets/portfolio/portfolio_projects_section.dart';
@@ -109,106 +110,133 @@ class _PortfolioPageState extends State<PortfolioPage>
 
     return Scaffold(
       backgroundColor: t.bg,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: t.border),
-              color: t.bg,
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Stack(
-              children: [
-                Column(
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: t.border),
+                  color: t.bg,
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Stack(
                   children: [
-                    Expanded(
-                      child: AnimatedBuilder(
-                        animation: _glowController,
-                        builder: (context, child) {
-                          const accent = Color(0xFF6B8E23);
-                          final glowT = Curves.easeInOut.transform(
-                            _glowController.value,
-                          );
-                          final glowOpacity =
-                              0.45 + (glowT * 0.45); // 0.45 → 0.90
-                          final content = child ?? const SizedBox.shrink();
+                    Column(
+                      children: [
+                        Expanded(
+                          child: AnimatedBuilder(
+                            animation: _glowController,
+                            builder: (context, child) {
+                              const accent = Color(0xFF6B8E23);
+                              final glowT = Curves.easeInOut.transform(
+                                _glowController.value,
+                              );
+                              final glowOpacity =
+                                  0.45 + (glowT * 0.45); // 0.45 → 0.90
+                              final content = child ?? const SizedBox.shrink();
 
-                          return RawScrollbar(
-                            controller: _scrollController,
-                            thumbVisibility: true,
-                            trackVisibility: true,
-                            thickness: 6.0,
-                            radius: const Radius.circular(3.0),
-                            thumbColor: accent.withValues(alpha: glowOpacity),
-                            trackColor: t.border.withValues(alpha: 0.15),
-                            trackBorderColor: Colors.transparent,
-                            child: content,
-                          );
-                        },
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PortfolioHomeSection(
-                                onViewWork: _openProjects,
-                                onContact: _scrollToContact,
-                                onAboutMe: _openAbout,
-                                onSkills: _openSkills,
-                                onProjects: _openProjects,
-                                onResume: _openResume,
-                                onGitHub: _openGitHub,
+                              return RawScrollbar(
+                                controller: _scrollController,
+                                thumbVisibility: true,
+                                trackVisibility: true,
+                                thickness: 6.0,
+                                radius: const Radius.circular(3.0),
+                                thumbColor: accent.withValues(
+                                  alpha: glowOpacity,
+                                ),
+                                trackColor: t.border.withValues(alpha: 0.15),
+                                trackBorderColor: Colors.transparent,
+                                child: content,
+                              );
+                            },
+                            child: SingleChildScrollView(
+                              controller: _scrollController,
+                              physics: const BouncingScrollPhysics(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PortfolioHomeSection(
+                                    onViewWork: _openProjects,
+                                    onContact: _scrollToContact,
+                                    onAboutMe: _openAbout,
+                                    onSkills: _openSkills,
+                                    onProjects: _openProjects,
+                                    onResume: _openResume,
+                                    onGitHub: _openGitHub,
+                                  ),
+                                  PortfolioContactSection(
+                                    sectionKey: _contactKey,
+                                    theme: t,
+                                  ),
+                                ],
                               ),
-                              PortfolioContactSection(
-                                sectionKey: _contactKey,
-                                theme: t,
+                            ),
+                          ),
+                        ),
+                        _FooterBar(
+                          onHome: _goHome,
+                          onSystemTheme:
+                              () => context.read<ThemeProvider>().setThemeMode(
+                                ThemeMode.system,
                               ),
-                            ],
+                          isMobile: isMobile,
+                          theme: t,
+                        ),
+                      ],
+                    ),
+
+                    // ── Floating "back to top" ──
+                    Positioned(
+                      right: isMobile ? 16.0 : 28.0,
+                      bottom: isMobile ? 76.0 : 82.0,
+                      child: IgnorePointer(
+                        ignoring: !_showScrollTop,
+                        child: AnimatedOpacity(
+                          opacity: _showScrollTop ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 200),
+                          child: AnimatedSlide(
+                            duration: const Duration(milliseconds: 200),
+                            offset:
+                                _showScrollTop
+                                    ? Offset.zero
+                                    : const Offset(0, 0.3),
+                            curve: Curves.easeOut,
+                            child: _ScrollTopIconButton(
+                              theme: t,
+                              onTap: _backToTop,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    _FooterBar(
-                      onHome: _goHome,
-                      onSystemTheme:
-                          () => context.read<ThemeProvider>().setThemeMode(
-                            ThemeMode.system,
-                          ),
-                      isMobile: isMobile,
-                      theme: t,
                     ),
                   ],
                 ),
-
-                // ── Floating "back to top" ──
-                Positioned(
-                  right: isMobile ? 16.0 : 28.0,
-                  bottom: isMobile ? 76.0 : 82.0,
-                  child: IgnorePointer(
-                    ignoring: !_showScrollTop,
-                    child: AnimatedOpacity(
-                      opacity: _showScrollTop ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 200),
-                      child: AnimatedSlide(
-                        duration: const Duration(milliseconds: 200),
-                        offset:
-                            _showScrollTop ? Offset.zero : const Offset(0, 0.3),
-                        curve: Curves.easeOut,
-                        child: _ScrollTopIconButton(
-                          theme: t,
-                          onTap: _backToTop,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+          Positioned(
+            top: 30.0,
+            right: 30.0,
+            child: SafeArea(
+              child: FloatingActionButton.small(
+                heroTag: 'portfolio-ai-guide',
+                tooltip: 'Ask Koidio’s portfolio guide',
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => const PortfolioAgentSheet(),
+                  );
+                },
+                child: const Icon(Icons.auto_awesome),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,0 +1,13 @@
+{
+  "assistantName": "Koidio Portfolio Guide",
+  "greeting": "Hi! I’m Koidio’s portfolio guide. Ask me about his projects, skills, experience, or how to get in touch.",
+  "topics": {
+    "flutter": "Koidio builds mobile and web applications with Flutter and Dart. His work includes portfolio projects, application concepts, and cross-platform user interfaces.",
+    "firebase": "Koidio has used Firebase for web deployment and backend-related workflows. His portfolio is now deployed through GitHub Pages with a custom domain.",
+    "cloud": "Koidio is developing cloud and cybersecurity skills, with interests in AWS administration, networking, secure application development, and engineering management.",
+    "career": "Koidio is pursuing software engineering and IT opportunities, including roles involving application development, cloud technology, and cybersecurity.",
+    "contact": "You can use the contact section of this portfolio or reach Koidio through the professional links shown on the site.",
+    "siikaa": "Siikaa is one of Koidio’s project concepts. The portfolio highlights its product direction, technologies, and visual design."
+  },
+  "fallback": "I can help with questions about Koidio’s Flutter work, portfolio projects, cloud and cybersecurity interests, professional background, and contact information."
+}
