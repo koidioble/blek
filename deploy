@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+flutter clean
+flutter pub get
+flutter analyze
+flutter build web --release --base-href /
+
+echo ""
+echo "✅ Local portfolio build completed successfully."
+echo ""
+echo "To publish your update:"
+echo "git add ."
+echo "git commit -m \"Update portfolio\""
+echo "git push origin main"
