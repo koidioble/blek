@@ -1,2 +1,13 @@
 *.save
 *.save
+
+# Flutter/Dart generated folders
+.dart_tool/
+build/
+.flutter-plugins-dependencies
+
+# Firebase local deployment cache
+.firebase/
+
+# Not needed for this Flutter project
+package-lock.json
