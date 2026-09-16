@@ -239,7 +239,7 @@ class _QuickQuestions extends StatelessWidget {
   Widget build(BuildContext context) {
     const questions = [
       'What Flutter projects has Koidio built?',
-      'Tell me about Siikaa',
+      'Tell me about Sii-Kaa',
       'What cloud skills does Koidio have?',
       'How can I contact Koidio?',
     ];
