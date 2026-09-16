@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.2
   flutter_launcher_icons: ^0.14.4
   flutter_localization: ^0.3.3
   flutter_localizations:
@@ -52,15 +53,7 @@ flutter:
     # Pictures
     - assets/pics/half_body.JPG
     - assets/pics/pic2.webp
-  
-    # json
-    - assets/json/tech1.json
-    - assets/json/tech2.json
-    - assets/json/tech3.json
-    - assets/json/tech4.json
-    - assets/json/tech5.json
-    - assets/json/tech6.json
-    - assets/json/tech7.json
+
 
     #portfolio
     - assets/portfolio/nkommo_cover.webp
@@ -68,7 +61,7 @@ flutter:
     - assets/portfolio/babylon_ai_cover.webp
     - assets/portfolio/digba_gym_cover.webp
     - assets/portfolio/salon_booking_cover.webp
-    - assets/portfolio/siikaa_ai_cover.webp
+    - assets/portfolio/siikaa_cover.webp
     - assets/portfolio/harmattan_cover.webp
 
 

@@ -15,6 +15,7 @@
 // "TODO" to find every spot to edit.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:koidio_ble/pages/my/my_colors.dart';
 import 'package:koidio_ble/pages/portfolio/portfolio_theme.dart';
 
@@ -23,7 +24,6 @@ import 'package:koidio_ble/pages/portfolio/portfolio_theme.dart';
 class TechCardData {
   final String label; // relationship type
   final IconData icon;
-  final String? lottieAsset; // optional — if set, used instead of icon
   final Color cardBg;
   final Color textColor;
   final Color chipBg;
@@ -33,7 +33,6 @@ class TechCardData {
   const TechCardData({
     required this.label,
     required this.icon,
-    this.lottieAsset,
     required this.cardBg,
     required this.textColor,
     required this.chipBg,
@@ -69,7 +68,7 @@ class MyTechPortfolioSection extends StatelessWidget {
   // Reused relationship-type styling across every domain so the meaning of
   // a color/icon stays consistent as you scan down the page.
   static final _crossPlatform = (
-    label: "Cross-Platform Product Engineering",
+    label: "Cross-Platform Product",
     icon: Icons.devices_rounded,
     bg: forestGreen,
     text: white,
@@ -96,12 +95,11 @@ class MyTechPortfolioSection extends StatelessWidget {
     text: white,
   );
 
-  static final List<TechDomainRow> _rows = [
+  List<TechDomainRow> get _rows => [
     TechDomainRow(
       // Short "resume" of the whole portfolio — kept to one line.
-      heading: "Engineering Capabilities",
-      description:
-          "Technologies I use to design, build, ship, and maintain software products.",
+      heading: "Engineering Capabilities.",
+      description: "",
       cards: [
         //tech1
         TechCardData(
@@ -109,12 +107,12 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _crossPlatform.icon,
           cardBg: _crossPlatform.bg,
           textColor: _crossPlatform.text,
-          lottieAsset: 'assets/json/tech7.json',
           chipBg: deepSkyBlue.withValues(alpha: 0.4),
-          labelBg: modernIndigo.withValues(alpha: 0.9),
+          labelBg: oliveLight.withValues(alpha: 0.9),
           techs: const [
             'Flutter',
             'Dart',
+            'React Native',
             'BLoC',
             'Provider',
             'Material 3',
@@ -122,10 +120,11 @@ class MyTechPortfolioSection extends StatelessWidget {
             'iOS',
             'Android',
             'Web',
+            'Xcode',
             'App Store Connect',
             'Play Console',
+            'Kotlin',
             'Android Studio',
-            'Xcode',
           ],
         ),
 
@@ -135,9 +134,8 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _web.icon,
           cardBg: _web.bg,
           textColor: _crossPlatform.text,
-          lottieAsset: 'assets/json/tech1.json',
           chipBg: roseGold.withValues(alpha: 0.44),
-          labelBg: green300.withValues(alpha: 0.9),
+          labelBg: navy.withValues(alpha: 0.9),
           techs: const [
             'React',
             'Next.js',
@@ -149,6 +147,7 @@ class MyTechPortfolioSection extends StatelessWidget {
             'Responsive Design',
             'Vercel',
             'Firebase Hosting',
+            'Intl',
           ],
         ),
 
@@ -158,7 +157,6 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _backend.icon,
           cardBg: _backend.bg,
           textColor: _backend.text,
-          lottieAsset: 'assets/json/tech3.json',
           chipBg: oliveDark,
           labelBg: oliveDark.withValues(alpha: 0.9),
           techs: const [
@@ -166,9 +164,10 @@ class MyTechPortfolioSection extends StatelessWidget {
             'Supabase Realtime',
             'Supabase Storage',
             'PostgreSQL',
+            'Firebase Core',
             'Firebase Authentication',
             'Cloud Firestore',
-            'Firebase Cloud Messaging',
+            'Firebase Messaging',
             'REST APIs',
             'HTTP',
             'JSON',
@@ -184,9 +183,8 @@ class MyTechPortfolioSection extends StatelessWidget {
           icon: _delivery.icon,
           cardBg: _delivery.bg,
           textColor: _delivery.text,
-          lottieAsset: 'assets/json/tech4.json',
           chipBg: lightSeaGreen,
-          labelBg: lightSeaGreen.withValues(alpha: 0.9),
+          labelBg: roseGold.withValues(alpha: 0.9),
           techs: const [
             'Git',
             'GitHub',
@@ -323,27 +321,28 @@ class _DomainRowState extends State<_DomainRow> {
 
     final label = Padding(
       padding: EdgeInsets.only(left: widget.pad, right: 24.0, top: 4.0),
-      child: Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: "${widget.row.heading}\n",
-              style: pStyle(
-                size: 22.0,
-                weight: FontWeight.w700,
-                color: widget.theme.text,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.row.heading,
+            style: pStyle(
+              size: 22.0,
+              weight: FontWeight.w700,
+              color: widget.theme.text,
             ),
-            TextSpan(
-              text: widget.row.description,
-              style: pStyle(
-                size: 22.0,
-                weight: FontWeight.w400,
-                color: widget.theme.muted,
-              ).copyWith(height: 1.4),
-            ),
-          ],
-        ),
+          ),
+
+          SizedBox(height: widget.isMobile ? 22.0 : 44.0),
+
+          Text(
+            widget.isMobile
+                ? "Tap a card to explore my development toolkit."
+                : "Click a card to explore my development toolkit.",
+            style: pStyle(color: widget.theme.text, height: 1.9),
+          ),
+          SizedBox(height: widget.isMobile ? 22.0 : 44.0),
+        ],
       ),
     );
 
@@ -362,10 +361,24 @@ class _DomainRowState extends State<_DomainRow> {
             separatorBuilder: (_, _) => const SizedBox(width: 14.0),
             itemBuilder: (context, index) {
               return _TechCard(
-                data: widget.row.cards[index],
-                width: cardWidth,
-                height: cardHeight,
-              );
+                    data: widget.row.cards[index],
+                    width: cardWidth,
+                    height: cardHeight,
+                  )
+                  .animate(delay: Duration(milliseconds: 110 * index))
+                  .fadeIn(duration: 450.ms, curve: Curves.easeOut)
+                  .slideX(
+                    begin: 0.12,
+                    end: 0.0,
+                    duration: 500.ms,
+                    curve: Curves.easeOutCubic,
+                  )
+                  .scale(
+                    begin: const Offset(0.96, 0.96),
+                    end: const Offset(1.0, 1.0),
+                    duration: 450.ms,
+                    curve: Curves.easeOutCubic,
+                  );
             },
           ),
         ),
@@ -436,11 +449,32 @@ class _TechCard extends StatefulWidget {
   State<_TechCard> createState() => _TechCardState();
 }
 
-class _TechCardState extends State<_TechCard> {
+class _TechCardState extends State<_TechCard>
+    with SingleTickerProviderStateMixin {
   bool _hovered = false;
   bool _expanded = false;
 
-  void _toggle() => setState(() => _expanded = !_expanded);
+  late final AnimationController _pulseController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1800),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    super.dispose();
+  }
+
+  void _toggle() {
+    setState(() => _expanded = !_expanded);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -450,41 +484,104 @@ class _TechCardState extends State<_TechCard> {
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: _toggle,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
-          curve: Curves.easeOutCubic,
-          width: widget.width,
-          height: widget.height,
-          transform:
-              _hovered
-                  ? (Matrix4.identity()..translateByDouble(0.0, -6.0, 0.0, 1.0))
-                  : Matrix4.identity(),
-          padding: const EdgeInsets.all(30.0),
-          decoration: BoxDecoration(
-            color: d.cardBg,
-            borderRadius: BorderRadius.circular(3.0),
-            boxShadow: [
-              BoxShadow(
-                color:
-                    _hovered
-                        ? d.textColor.withValues(alpha: 0.20)
-                        : Colors.black.withValues(alpha: 0.05),
-                blurRadius: _hovered ? 18.0 : 8.0,
-                offset: Offset(0, _hovered ? 8 : 3),
+      child: Semantics(
+        button: true,
+        toggled: _expanded,
+        label:
+            '${d.label}. ${_expanded ? 'Hide development tools' : 'Show development tools'}.',
+        child: GestureDetector(
+          onTap: _toggle,
+          child: AnimatedScale(
+            duration: const Duration(milliseconds: 220),
+            curve: Curves.easeOutCubic,
+            scale: _hovered ? 1.025 : 1.0,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 260),
+              curve: Curves.easeOutCubic,
+              width: widget.width,
+              height: widget.height,
+              transform:
+                  Matrix4.identity()
+                    ..translateByDouble(0.0, _hovered ? -7.0 : 0.0, 0.0, 1.0),
+              padding: const EdgeInsets.all(30.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    d.cardBg.withValues(alpha: 0.98),
+                    Color.lerp(d.cardBg, Colors.black, 0.28)!,
+                    Color.lerp(d.cardBg, Colors.black, 0.48)!,
+                  ],
+                  stops: const [0.0, 0.55, 1.0],
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+                border: Border.all(
+                  color: d.textColor.withValues(alpha: _hovered ? 0.38 : 0.12),
+                  width: _hovered ? 1.4 : 1.0,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: d.cardBg.withValues(alpha: _hovered ? 0.42 : 0.16),
+                    blurRadius: _hovered ? 28.0 : 12.0,
+                    spreadRadius: _hovered ? 2.0 : 0.0,
+                    offset: Offset(0.0, _hovered ? 12.0 : 5.0),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 180),
-            child:
-                _expanded
-                    ? _ExpandedContent(key: const ValueKey('expanded'), data: d)
-                    : _CollapsedContent(
-                      key: const ValueKey('collapsed'),
-                      data: d,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: -74.0,
+                    right: -74.0,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      width: _hovered ? 185.0 : 145.0,
+                      height: _hovered ? 185.0 : 145.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: d.textColor.withValues(
+                          alpha: _hovered ? 0.15 : 0.08,
+                        ),
+                      ),
                     ),
+                  ),
+
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 260),
+                    reverseDuration: const Duration(milliseconds: 180),
+                    transitionBuilder: (child, animation) {
+                      final slide = Tween<Offset>(
+                        begin: const Offset(0.08, 0.0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.easeOutCubic,
+                        ),
+                      );
+
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SlideTransition(position: slide, child: child),
+                      );
+                    },
+                    child:
+                        _expanded
+                            ? _ExpandedContent(
+                              key: const ValueKey('expanded'),
+                              data: d,
+                            )
+                            : _AnimatedCollapsedContent(
+                              key: const ValueKey('collapsed'),
+                              data: d,
+                              hovered: _hovered,
+                              pulse: _pulseController,
+                            ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -493,10 +590,17 @@ class _TechCardState extends State<_TechCard> {
 }
 
 // Collapsed: title bottom-left, icon middle-right. No pills.
-class _CollapsedContent extends StatelessWidget {
+class _AnimatedCollapsedContent extends StatelessWidget {
   final TechCardData data;
+  final bool hovered;
+  final Animation<double> pulse;
 
-  const _CollapsedContent({super.key, required this.data});
+  const _AnimatedCollapsedContent({
+    super.key,
+    required this.data,
+    required this.hovered,
+    required this.pulse,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -504,31 +608,104 @@ class _CollapsedContent extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerRight,
-          child: Icon(
-            data.icon,
-            size: 44.0,
-            color: data.textColor.withValues(alpha: 0.9),
+          child: AnimatedBuilder(
+            animation: pulse,
+            builder: (context, child) {
+              final scale = 1.0 + (pulse.value * 0.08);
+
+              return Transform.scale(
+                scale: hovered ? scale : 1.0,
+                child: child,
+              );
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 220),
+              width: hovered ? 96.0 : 82.0,
+              height: hovered ? 96.0 : 82.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: data.textColor.withValues(alpha: hovered ? 0.18 : 0.10),
+                border: Border.all(
+                  color: data.textColor.withValues(
+                    alpha: hovered ? 0.38 : 0.16,
+                  ),
+                ),
+              ),
+              child: Icon(
+                data.icon,
+                size: hovered ? 43.0 : 38.0,
+                color: data.textColor,
+              ),
+            ),
           ),
         ),
+
+        Align(
+          alignment: Alignment.topLeft,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 180),
+            opacity: hovered ? 1.0 : 0.72,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.touch_app_rounded,
+                  size: 15.0,
+                  color: data.textColor,
+                ),
+                const SizedBox(width: 6.0),
+                Text(
+                  'EXPLORE TOOLS',
+                  style: pStyle(
+                    size: 10.0,
+                    weight: FontWeight.w700,
+                    color: data.textColor,
+                  ).copyWith(letterSpacing: 0.9),
+                ),
+              ],
+            ),
+          ),
+        ),
+
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 6.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 8.0,
+            ),
             decoration: BoxDecoration(
               color: data.labelBg,
-              borderRadius: BorderRadius.circular(6.0),
+              borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Text(
-              data.label,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: pStyle(
-                size: 13.0,
-                // weight: FontWeight.w600,
-                color: data.textColor,
-                height: 1.3,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: Text(
+                    data.label,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: pStyle(
+                      size: 13.0,
+                      weight: FontWeight.w600,
+                      color: data.textColor,
+                    ).copyWith(height: 1.25),
+                  ),
+                ),
+                const SizedBox(width: 5.0),
+                AnimatedSlide(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOutCubic,
+                  offset: hovered ? const Offset(0.18, 0.0) : Offset.zero,
+                  child: Icon(
+                    Icons.arrow_forward_rounded,
+                    size: 16.0,
+                    color: data.textColor,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -548,42 +725,80 @@ class _ExpandedContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Technologies',
-          style: pStyle(
-            size: 13.0,
-            weight: FontWeight.w600,
-            color: data.textColor,
-          ).copyWith(letterSpacing: 0.9),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'TECHNOLOGIES',
+                style: pStyle(
+                  size: 12.0,
+                  weight: FontWeight.w700,
+                  color: data.textColor,
+                ).copyWith(letterSpacing: 1.0),
+              ),
+            ),
+            Icon(
+              Icons.close_rounded,
+              size: 18.0,
+              color: data.textColor.withValues(alpha: 0.85),
+            ),
+          ],
         ),
-        const SizedBox(height: 9.0),
+
+        const SizedBox(height: 10.0),
+
         Expanded(
           child: SingleChildScrollView(
             child: Wrap(
-              spacing: 6.0,
-              runSpacing: 6.0,
+              spacing: 7.0,
+              runSpacing: 7.0,
               children: [
                 for (final tech in data.techs)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6.0,
-                      vertical: 3.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: data.chipBg,
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Text(
-                      tech,
-                      style: pStyle(
-                        size: 9.0,
-                        weight: FontWeight.w600,
-                        color: data.textColor,
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: 0.92 + (value * 0.08),
+                        child: Opacity(opacity: value, child: child),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 5.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: data.chipBg,
+                        borderRadius: BorderRadius.circular(20.0),
+                        border: Border.all(
+                          color: data.textColor.withValues(alpha: 0.12),
+                        ),
+                      ),
+                      child: Text(
+                        tech,
+                        style: pStyle(
+                          size: 10.0,
+                          weight: FontWeight.w600,
+                          color: data.textColor,
+                        ),
                       ),
                     ),
                   ),
               ],
             ),
+          ),
+        ),
+
+        const SizedBox(height: 10.0),
+
+        Text(
+          'Click again to close',
+          style: pStyle(
+            size: 10.0,
+            weight: FontWeight.w500,
+            color: data.textColor.withValues(alpha: 0.78),
           ),
         ),
       ],

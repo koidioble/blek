@@ -70,7 +70,7 @@ class _DesktopGrid extends StatelessWidget {
         crossAxisCount: crossCount,
         crossAxisSpacing: 30.0,
         mainAxisSpacing: 30.0,
-        mainAxisExtent: 560.0,
+        mainAxisExtent: 610.0,
       ),
       itemCount: portfolioProjects.length,
       itemBuilder:
@@ -249,59 +249,63 @@ class _ProjectCardState extends State<_ProjectCard>
                       overflow: TextOverflow.ellipsis,
                     ),
                     Divider(color: widget.theme.border, height: 28),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Builder(
-                            builder: (context) {
-                              const maxTagsOnCard = 8;
-                              final stack = widget.data.stack;
-                              final visible =
-                                  stack.take(maxTagsOnCard).toList();
-                              final remaining = stack.length - visible.length;
+                    Builder(
+                      builder: (context) {
+                        const maxTagsOnCard = 8;
+                        final stack = widget.data.stack;
+                        final visible = stack.take(maxTagsOnCard).toList();
+                        final remaining = stack.length - visible.length;
 
-                              return Wrap(
-                                spacing: 6.0,
-                                runSpacing: 6.0,
-                                children: [
-                                  ...visible.map(
-                                    (t) => PTag(t, theme: widget.theme),
-                                  ),
-                                  if (remaining > 0)
-                                    PTag('+$remaining', theme: widget.theme),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 13.0),
-                        AnimatedSlide(
-                          offset: Offset(_hovered ? 0.1 : 0, 0),
-                          duration: const Duration(milliseconds: 220),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                MediaQuery.of(context).size.width < 420.0
-                                    ? 'Details'
-                                    : 'View case study',
-                                style: pStyle(
-                                  size: 13.0,
-                                  weight: FontWeight.w600,
-                                  color: accent,
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Wrap(
+                              spacing: 6.0,
+                              runSpacing: 6.0,
+                              children: [
+                                ...visible.map(
+                                  (tag) => PTag(tag, theme: widget.theme),
+                                ),
+                                if (remaining > 0)
+                                  PTag('+$remaining', theme: widget.theme),
+                              ],
+                            ),
+
+                            const SizedBox(height: 16.0),
+
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: AnimatedSlide(
+                                offset: Offset(_hovered ? 0.10 : 0.0, 0.0),
+                                duration: const Duration(milliseconds: 220),
+                                curve: Curves.easeOutCubic,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      MediaQuery.of(context).size.width < 420.0
+                                          ? 'Details'
+                                          : 'View case study',
+                                      style: pStyle(
+                                        size: 13.0,
+                                        weight: FontWeight.w600,
+                                        color: accent,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6.0),
+                                    Icon(
+                                      Icons.arrow_forward_rounded,
+                                      size: 16.0,
+                                      color: accent,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(width: 6.0),
-                              Icon(
-                                Icons.arrow_forward_rounded,
-                                size: 16.0,
-                                color: accent,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -476,14 +480,18 @@ class _LogoPill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(data.icon, size: 13, color: accent),
-          const SizedBox(width: 6),
-          Text(
-            data.name,
-            style: pStyle(
-              size: 11,
-              weight: FontWeight.w600,
-              color: Colors.white.withValues(alpha: 0.88),
+          Icon(data.icon, size: 13.0, color: accent),
+          const SizedBox(width: 6.0),
+          Flexible(
+            child: Text(
+              data.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: pStyle(
+                size: 11.0,
+                weight: FontWeight.w600,
+                color: Colors.white.withValues(alpha: 0.90),
+              ),
             ),
           ),
         ],
@@ -510,41 +518,52 @@ class _StatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final bgColor =
         onImage
-            ? Colors.black.withValues(alpha: 0.62)
-            : accent.withValues(alpha: 0.12);
+            ? Colors.black.withValues(alpha: 0.63)
+            : accent.withValues(alpha: 0.13);
     final borderColor =
         onImage
-            ? Colors.white.withValues(alpha: 0.18)
+            ? Colors.white.withValues(alpha: 0.9)
             : accent.withValues(alpha: 0.30);
     final textColor = onImage ? Colors.white : accent;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(100),
-        border: Border.all(color: borderColor),
-        boxShadow:
-            onImage
-                ? [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.25),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-                : null,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          PulsingDot(color: accent, size: 5),
-          const SizedBox(width: 5),
-          Text(
-            status,
-            style: pStyle(size: 10, color: textColor, weight: FontWeight.w600),
-          ),
-        ],
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 160.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 6.0),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(99.0),
+          border: Border.all(color: borderColor),
+          boxShadow:
+              onImage
+                  ? [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.25),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                  : null,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PulsingDot(color: accent, size: 5),
+            const SizedBox(width: 5),
+            Flexible(
+              child: Text(
+                status,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: pStyle(
+                  size: 13.0,
+                  color: textColor,
+                  weight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

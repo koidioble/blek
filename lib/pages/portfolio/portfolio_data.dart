@@ -276,7 +276,6 @@ final List<ProjectData> portfolioProjects = [
       'Xcode',
       'Visual Studio Code',
       'Swift',
-      'iOS',
       'Objective-C',
       'C/C++',
       'BLoC',
@@ -298,7 +297,7 @@ final List<ProjectData> portfolioProjects = [
         'push notifications, and BLoC-based state management. Released on the '
         'Apple App Store.',
     highlights: [
-      'Released on the Apple App Store; Android release in development',
+      'Released on the Apple App Store.',
       'Built a Flutter client using BLoC to separate UI, state, and business logic',
       'Implemented user authentication with Google and Apple sign-in',
       'Designed Cloud Firestore-backed conversations, comments, likes, and repost workflows',
@@ -310,7 +309,7 @@ final List<ProjectData> portfolioProjects = [
 
   const ProjectData(
     name: 'Sii-Kaa',
-    logoAsset: 'assets/portfolio/siikaa_ai_cover.webp',
+    logoAsset: 'assets/portfolio/siikaa_cover.webp',
     description:
         'A Flutter currency analytics application that presents API-driven '
         'exchange-rate data for more than 170 currencies, with search, '

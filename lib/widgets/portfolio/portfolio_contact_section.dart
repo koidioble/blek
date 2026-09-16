@@ -129,7 +129,7 @@ class _ContactInfo extends StatelessWidget {
         Text(
           "I work across responsive application "
           "experiences, APIs, authentication, cloud-backed data, and deployment. ",
-          style: pStyle(color: t.muted, height: 1.9),
+          style: pStyle(color: t.text, height: 1.9),
         ),
         SizedBox(height: isMobile ? 22.0 : 44.0),
 
