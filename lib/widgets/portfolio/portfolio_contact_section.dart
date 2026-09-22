@@ -126,10 +126,20 @@ class _ContactInfo extends StatelessWidget {
         SizedBox(height: isMobile ? 22.0 : 44.0),
 
         // ── Body copy ──
-        Text(
-          "I work across responsive application "
-          "experiences, APIs, authentication, cloud-backed data, and deployment. ",
-          style: pStyle(color: t.text, height: 1.9),
+        InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(12.0),
+
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutCubic,
+            padding: EdgeInsets.all(isMobile ? 14.0 : 16.0),
+            child: Text(
+              "I work across responsive application "
+              "experiences, APIs, authentication, cloud-backed data, and deployment. ",
+              style: pStyle(color: t.text, height: 1.9),
+            ),
+          ),
         ),
         SizedBox(height: isMobile ? 22.0 : 44.0),
 
