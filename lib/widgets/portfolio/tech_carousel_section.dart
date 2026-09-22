@@ -267,6 +267,7 @@ class _DomainRowState extends State<_DomainRow> {
   final ScrollController _controller = ScrollController();
   bool _canScrollLeft = false;
   bool _canScrollRight = false;
+  bool _hovered = false;
 
   @override
   void initState() {
@@ -318,6 +319,8 @@ class _DomainRowState extends State<_DomainRow> {
     final cardWidth = widget.isMobile ? 220.0 : 300.0;
     final cardHeight = widget.isMobile ? 220.0 : 300.0;
     final labelWidth = widget.isMobile ? 0.0 : 250.0;
+    final isMobile = MediaQuery.of(context).size.width < 700;
+    const accent = Color(0xFF6B8E23);
 
     final label = Padding(
       padding: EdgeInsets.only(left: widget.pad, right: 24.0, top: 4.0),
@@ -335,11 +338,47 @@ class _DomainRowState extends State<_DomainRow> {
 
           SizedBox(height: widget.isMobile ? 22.0 : 44.0),
 
-          Text(
-            widget.isMobile
-                ? "Tap a card to explore my development toolkit."
-                : "Click a card to explore my development toolkit.",
-            style: pStyle(color: widget.theme.text, height: 1.9),
+          MouseRegion(
+            onEnter: (_) => setState(() => _hovered = true),
+            onExit: (_) => setState(() => _hovered = false),
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(12.0),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 180),
+                curve: Curves.easeOutCubic,
+                padding: EdgeInsets.all(isMobile ? 14.0 : 16.0),
+
+                decoration: BoxDecoration(
+                  color:
+                      _hovered
+                          ? accent.withValues(alpha: 0.10)
+                          : widget.theme.surface,
+                  borderRadius: BorderRadius.circular(12.0),
+                  border: Border.all(
+                    color:
+                        _hovered
+                            ? accent.withValues(alpha: 0.80)
+                            : widget.theme.accent2.withValues(alpha: 0.82),
+                    width: _hovered ? 1.4 : 1.0,
+                  ),
+                  boxShadow: [
+                    if (_hovered)
+                      BoxShadow(
+                        color: accent.withValues(alpha: 0.16),
+                        blurRadius: 16.0,
+                        offset: const Offset(0.0, 7.0),
+                      ),
+                  ],
+                ),
+                child: Text(
+                  widget.isMobile
+                      ? "Tap a card to explore my development toolkit."
+                      : "Click a card to explore my development toolkit.",
+                  style: pStyle(color: widget.theme.text, height: 1.9),
+                ),
+              ),
+            ),
           ),
           SizedBox(height: widget.isMobile ? 22.0 : 44.0),
         ],
