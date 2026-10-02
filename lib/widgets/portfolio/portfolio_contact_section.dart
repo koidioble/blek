@@ -21,6 +21,7 @@ class PortfolioContactSection extends StatelessWidget {
     final w = MediaQuery.of(context).size.width;
     final isMobile = w < 700;
     final pad = isMobile ? kPadM : kPad;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -69,6 +70,7 @@ class _ContactDesktop extends StatelessWidget {
 class _ContactMobile extends StatelessWidget {
   final PortfolioTheme theme;
   const _ContactMobile({required this.theme});
+  
 
   @override
   Widget build(BuildContext context) => Column(
@@ -77,14 +79,23 @@ class _ContactMobile extends StatelessWidget {
 }
 
 // ── Contact info ──────────────────────────────────────────────────────────────
-class _ContactInfo extends StatelessWidget {
+class _ContactInfo extends StatefulWidget {
   final PortfolioTheme theme;
   const _ContactInfo({required this.theme});
 
   @override
+  State<_ContactInfo> createState() => _ContactInfoState();
+}
+
+class _ContactInfoState extends State<_ContactInfo> {
+  bool _hovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    final t = theme;
+    final t = widget.theme;
     final isMobile = MediaQuery.of(context).size.width < 700;
+    const accent = Color(0xFF6B8E23);
+
     final List<(FaIconData, Color, String, String, String)> links = [
       (
         FontAwesomeIcons.linkedinIn,
@@ -126,18 +137,44 @@ class _ContactInfo extends StatelessWidget {
         SizedBox(height: isMobile ? 22.0 : 44.0),
 
         // ── Body copy ──
-        InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(12.0),
+        MouseRegion(
+          onEnter: (_) => setState(() => _hovered = true),
+          onExit: (_) => setState(() => _hovered = false),
+          child: InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(12.0),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              curve: Curves.easeOutCubic,
+              padding: EdgeInsets.all(isMobile ? 14.0 : 16.0),
 
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 180),
-            curve: Curves.easeOutCubic,
-            padding: EdgeInsets.all(isMobile ? 14.0 : 16.0),
-            child: Text(
-              "I work across responsive application "
-              "experiences, APIs, authentication, cloud-backed data, and deployment. ",
-              style: pStyle(color: t.text, height: 1.9),
+              decoration: BoxDecoration(
+                color:
+                    _hovered
+                        ? accent.withValues(alpha: 0.10)
+                        : widget.theme.surface,
+                borderRadius: BorderRadius.circular(12.0),
+                border: Border.all(
+                  color:
+                      _hovered
+                          ? accent.withValues(alpha: 0.80)
+                          : widget.theme.accent2.withValues(alpha: 0.82),
+                  width: _hovered ? 1.4 : 1.0,
+                ),
+                boxShadow: [
+                  if (_hovered)
+                    BoxShadow(
+                      color: accent.withValues(alpha: 0.16),
+                      blurRadius: 16.0,
+                      offset: const Offset(0.0, 7.0),
+                    ),
+                ],
+              ),
+              child: Text(
+                "I work across responsive application "
+                "experiences, APIs, authentication, cloud-backed data, and deployment. ",
+                style: pStyle(color: t.text, height: 1.9),
+              ),
             ),
           ),
         ),

@@ -47,7 +47,7 @@ class PortfolioHomeSection extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.white,
                   image: DecorationImage(
-                    image: AssetImage('assets/pics/pic2.webp'),
+                    image: AssetImage('assets/pics/half_body.JPG'),
                     fit: BoxFit.fitHeight,
                   ),
                 ),

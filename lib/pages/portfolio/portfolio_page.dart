@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:koidio_ble/pages/portfolio/portfolio_section_page.dart';
 import 'package:koidio_ble/pages/portfolio/portfolio_theme.dart';
 import 'package:koidio_ble/theme/theme_provider.dart';
@@ -11,6 +10,8 @@ import 'package:koidio_ble/widgets/portfolio/portfolio_projects_section.dart';
 import 'package:koidio_ble/widgets/portfolio/portfolio_skills_section.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'portfolio_navigation.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
@@ -79,7 +80,11 @@ class _PortfolioPageState extends State<PortfolioPage>
     Navigator.of(context).push(
       MaterialPageRoute(
         builder:
-            (_) => const PortfolioSectionPage(child: PortfolioAboutSection()),
+            (_) => const PortfolioSectionPage(
+              pageIcon: Icons.person_rounded,
+              iconTooltip: 'Back from About Me',
+              child: PortfolioAboutSection(),
+            ),
       ),
     );
   }
@@ -88,7 +93,11 @@ class _PortfolioPageState extends State<PortfolioPage>
     Navigator.of(context).push(
       MaterialPageRoute(
         builder:
-            (_) => const PortfolioSectionPage(child: PortfolioSkillsSection()),
+            (_) => const PortfolioSectionPage(
+              pageIcon: Icons.code_rounded,
+              iconTooltip: 'Back from Engineering Skills',
+              child: PortfolioSkillsSection(),
+            ),
       ),
     );
   }
@@ -97,8 +106,11 @@ class _PortfolioPageState extends State<PortfolioPage>
     Navigator.of(context).push(
       MaterialPageRoute(
         builder:
-            (_) =>
-                const PortfolioSectionPage(child: PortfolioProjectsSection()),
+            (_) => const PortfolioSectionPage(
+              pageIcon: Icons.folder_special_rounded,
+              iconTooltip: 'Back from Projects',
+              child: PortfolioProjectsSection(),
+            ),
       ),
     );
   }
@@ -127,68 +139,84 @@ class _PortfolioPageState extends State<PortfolioPage>
                     Column(
                       children: [
                         Expanded(
-                          child: AnimatedBuilder(
-                            animation: _glowController,
-                            builder: (context, child) {
-                              const accent = Color(0xFF6B8E23);
-                              final glowT = Curves.easeInOut.transform(
-                                _glowController.value,
-                              );
-                              final glowOpacity =
-                                  0.45 + (glowT * 0.45); // 0.45 → 0.90
-                              final content = child ?? const SizedBox.shrink();
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: isMobile ? 64.0 : 74.0,
+                            ),
+                            child: AnimatedBuilder(
+                              animation: _glowController,
+                              builder: (context, child) {
+                                const accent = Color(0xFF6B8E23);
+                                final glowT = Curves.easeInOut.transform(
+                                  _glowController.value,
+                                );
+                                final glowOpacity = 0.45 + (glowT * 0.45);
+                                final content =
+                                    child ?? const SizedBox.shrink();
 
-                              return RawScrollbar(
+                                return RawScrollbar(
+                                  controller: _scrollController,
+                                  thumbVisibility: true,
+                                  trackVisibility: true,
+                                  thickness: 6.0,
+                                  radius: const Radius.circular(3.0),
+                                  thumbColor: accent.withValues(
+                                    alpha: glowOpacity,
+                                  ),
+                                  trackColor: t.border.withValues(alpha: 0.15),
+                                  trackBorderColor: Colors.transparent,
+                                  child: content,
+                                );
+                              },
+                              child: SingleChildScrollView(
                                 controller: _scrollController,
-                                thumbVisibility: true,
-                                trackVisibility: true,
-                                thickness: 6.0,
-                                radius: const Radius.circular(3.0),
-                                thumbColor: accent.withValues(
-                                  alpha: glowOpacity,
+                                physics: const BouncingScrollPhysics(),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PortfolioHomeSection(
+                                      onViewWork: _openProjects,
+                                      onContact: _scrollToContact,
+                                      onAboutMe: _openAbout,
+                                      onSkills: _openSkills,
+                                      onProjects: _openProjects,
+                                      onResume: _openResume,
+                                      onGitHub: _openGitHub,
+                                    ),
+                                    PortfolioContactSection(
+                                      sectionKey: _contactKey,
+                                      theme: t,
+                                    ),
+                                  ],
                                 ),
-                                trackColor: t.border.withValues(alpha: 0.15),
-                                trackBorderColor: Colors.transparent,
-                                child: content,
-                              );
-                            },
-                            child: SingleChildScrollView(
-                              controller: _scrollController,
-                              physics: const BouncingScrollPhysics(),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PortfolioHomeSection(
-                                    onViewWork: _openProjects,
-                                    onContact: _scrollToContact,
-                                    onAboutMe: _openAbout,
-                                    onSkills: _openSkills,
-                                    onProjects: _openProjects,
-                                    onResume: _openResume,
-                                    onGitHub: _openGitHub,
-                                  ),
-                                  PortfolioContactSection(
-                                    sectionKey: _contactKey,
-                                    theme: t,
-                                  ),
-                                ],
                               ),
                             ),
                           ),
                         ),
-                        _FooterBar(
+                        PortfolioBottomNav(
                           onHome: _goHome,
-                          onSystemTheme:
-                              () => context.read<ThemeProvider>().setThemeMode(
-                                ThemeMode.system,
-                              ),
                           isMobile: isMobile,
                           theme: t,
                         ),
                       ],
                     ),
 
-                    // ── Floating "back to top" ──
+                    // TOP APP BAR — inside the portfolio frame.
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: PortfolioTopBar(
+                        theme: t,
+                        isMobile: isMobile,
+                        pageIcon: Icons.home_rounded,
+                        iconTooltip: 'Home',
+                        onPageIconTap: _goHome,
+                        onOpenAgent: _openPortfolioAgent,
+                      ),
+                    ),
+
+                    // Floating scroll-to-top button.
                     Positioned(
                       right: isMobile ? 16.0 : 28.0,
                       bottom: isMobile ? 76.0 : 82.0,
@@ -214,25 +242,6 @@ class _PortfolioPageState extends State<PortfolioPage>
                     ),
                   ],
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 30.0,
-            right: 30.0,
-            child: SafeArea(
-              child: FloatingActionButton.small(
-                heroTag: 'portfolio-ai-guide',
-                tooltip: 'Ask Koidio’s portfolio guide',
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    builder: (_) => const PortfolioAgentSheet(),
-                  );
-                },
-                child: const Icon(Icons.auto_awesome),
               ),
             ),
           ),
@@ -291,71 +300,13 @@ class _PortfolioPageState extends State<PortfolioPage>
       SnackBar(content: Text(message), behavior: SnackBarBehavior.floating),
     );
   }
-}
 
-// ─────────────────────────────────────────────────────────────────────────────
-// FOOTER BAR
-// ─────────────────────────────────────────────────────────────────────────────
-class _FooterBar extends StatelessWidget {
-  final VoidCallback onHome;
-  final VoidCallback onSystemTheme;
-  final bool isMobile;
-  final PortfolioTheme theme;
-
-  const _FooterBar({
-    required this.onHome,
-    required this.onSystemTheme,
-    required this.isMobile,
-    required this.theme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = context.watch<ThemeProvider>().themeMode == ThemeMode.dark;
-
-    return Container(
-      height: isMobile ? 60.0 : 66.0,
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16.0 : kPad),
-      decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: theme.border)),
-      ),
-      child: Row(
-        children: [
-          // ── KYB logo, left side, bigger ──
-          MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                isDark
-                    ? 'assets/logo/KYB_icon_dark.png'
-                    : 'assets/logo/KYB_icon_light.png',
-                width: isMobile ? 22.0 : 44.0,
-                height: isMobile ? 22.0 : 44.0,
-              ),
-            ),
-          ),
-
-          const Spacer(),
-
-          // ── existing right-side controls ──
-          _ThemeToggleBtn(theme: theme),
-          const SizedBox(width: 13.0),
-          _FooterBtn(
-            label: 'System',
-            icon: FontAwesomeIcons.gear,
-            onTap: onSystemTheme,
-            theme: theme,
-          ),
-          const SizedBox(width: 13.0),
-          _FooterBtn(
-            label: 'Home',
-            icon: FontAwesomeIcons.house,
-            onTap: onHome,
-            theme: theme,
-          ),
-        ],
-      ),
+  void _openPortfolioAgent() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const PortfolioAgentSheet(),
     );
   }
 }
@@ -411,72 +362,6 @@ class _ThemeToggleBtnState extends State<_ThemeToggleBtn> {
       ),
     );
   }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// FOOTER BUTTON
-// ─────────────────────────────────────────────────────────────────────────────
-class _FooterBtn extends StatefulWidget {
-  final String label;
-  final VoidCallback onTap;
-  final PortfolioTheme theme;
-  final FaIconData? icon;
-
-  const _FooterBtn({
-    required this.label,
-    required this.onTap,
-    required this.theme,
-    this.icon,
-  });
-
-  @override
-  State<_FooterBtn> createState() => _FooterBtnState();
-}
-
-class _FooterBtnState extends State<_FooterBtn> {
-  bool _hov = false;
-
-  @override
-  Widget build(BuildContext context) => MouseRegion(
-    onEnter: (_) => setState(() => _hov = true),
-    onExit: (_) => setState(() => _hov = false),
-    cursor: SystemMouseCursors.click,
-    child: GestureDetector(
-      onTap: widget.onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 160),
-        padding: const EdgeInsets.symmetric(horizontal: 13.0, vertical: 6.0),
-        decoration: BoxDecoration(
-          color: _hov ? widget.theme.border : Colors.transparent,
-          borderRadius: BorderRadius.circular(9.0),
-          border: Border.all(color: widget.theme.border),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.icon != null) ...[
-              const SizedBox(width: 6.0),
-            ] else if (widget.icon != null) ...[
-              FaIcon(
-                widget.icon,
-                size: 13.0,
-                color: _hov ? widget.theme.text : widget.theme.muted,
-              ),
-              const SizedBox(width: 6.0),
-            ],
-
-            Text(
-              widget.label,
-              style: TextStyle(
-                fontSize: 11,
-                color: _hov ? widget.theme.text : widget.theme.muted,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
